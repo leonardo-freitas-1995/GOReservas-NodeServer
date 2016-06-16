@@ -1,0 +1,10 @@
+.tmp
+.DS_Store
+.DS_Store?
+node_modules/
+public/vendor/
+public/css/production/
+dist/
+scripts/
+.idea/
+.lock
