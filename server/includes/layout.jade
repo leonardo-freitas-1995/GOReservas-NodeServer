@@ -1,0 +1,17 @@
+doctype
+html
+    head
+        title GO Reservas
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1.0')
+        link(href="/favicon.ico", rel="shortcut icon", type="image/x-icon")
+        link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet", type="text/css")
+        link(href="https://fonts.googleapis.com/css?family=Lato", rel="stylesheet", type="text/css")
+        link(href='https://fonts.googleapis.com/css?family=Open+Sans:300', rel='stylesheet', type='text/css')
+        link(rel="stylesheet", href="/vendor/Materialize/dist/css/materialize.min.css")
+        link(rel="stylesheet", href="/vendor/font-awesome/css/font-awesome.min.css")
+        link(rel="stylesheet", href="/css/main.css")
+
+    body(ng-app='goreservas')
+        include current-user
+        block main-content
+        include scripts

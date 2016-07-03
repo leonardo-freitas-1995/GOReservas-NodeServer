@@ -15,6 +15,12 @@
     "tests"
   ],
   "dependencies": {
-
+    "jquery": "~3.0.0",
+    "Materialize": "materialize#~0.97.6",
+    "font-awesome": "~4.6.3",
+    "angular": "~1.5.7",
+    "angular-resource": "~1.5.7",
+    "angular-route": "~1.5.7",
+    "angular-materialize": "~0.1.9"
   }
 }

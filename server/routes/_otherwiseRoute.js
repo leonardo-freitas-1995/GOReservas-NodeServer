@@ -4,9 +4,9 @@ module.exports = function (app) {
         res.send(404);
     });
 
-/*    app.get('*', function (req, res) {
+    app.get('*', function (req, res) {
         res.render('index', {
             bootstrappedUser: req.user
         });
-    });*/
+    });
 };
