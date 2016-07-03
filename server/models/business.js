@@ -11,5 +11,8 @@ module.exports =  function(app){
         .columnMap('autoAccept', 'autoAccept')
         .columnMap('pricePerReserve', 'pricePerReserve')
         .columnMap('pricePerPerson', 'pricePerPerson')
-        .columnMap('rating', 'rating');
+        .columnMap('rating', 'rating')
+        .columnMap('latitude', 'latitude')
+        .columnMap('longitude', 'longitude')
+        .columnMap('imageURL', 'imageURL');
 };
