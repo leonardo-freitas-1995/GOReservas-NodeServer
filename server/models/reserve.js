@@ -1,4 +1,4 @@
-module.exports =  function(){
+module.exports =  function(app){
 
     return app.db.tableMap('User')
         .columnMap('client', 'client')
@@ -9,5 +9,5 @@ module.exports =  function(){
         .columnMap('quantity', 'quantity')
         .columnMap('confirmed', 'confirmed')
         .columnMap('totalValue', 'totalValue');
-    
+
 };
