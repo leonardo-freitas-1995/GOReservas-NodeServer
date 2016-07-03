@@ -1,42 +1,39 @@
 module.exports =  function(app){
 
     var Business = app.models.reserve;
+    var Session = app.db;
 
     var controller = {};
 
-    controller.createBusiness = function (req, res) {
-        var businessData = req.body;
-        Business.create(businessData, function(err, newReserve){
-            if (err){
-                return res.send({success: false});
-            }
-            else{
-                return res.send({success: true});
-            }
-        })
-    };
-
-    controller.deleteBusiness = function (req, res) {
-        var reserveId = req.params.id;
-        Business.remove({_id: reserveId}).exec(function(err, doc){
-            if (err){
-                res.send({success: false});
-            }
-            else {
-                res.send({success: true});
-            }
+    controller.getAllBusiness = function(req, res){
+        Session.query(Business).select().then(function(result){
+            res.send({success: false, data: result});
+        }).catch(function (error) {
+            res.send({success: false, reason: "error"});
         });
     };
 
-    controller.getBusiness = function (req, res) {
-        var businessId = req.params.id;
-        Business.findOne({_id: businessId}).exec(function(err, doc){
-            if (err){
-                res.send({success: false});
+    controller.getBusiness = function(req, res){
+        var id = req.params.id;
+        Session.query(Business).where(Business.id.Equal(id)).then(function(result){
+            if (result.length){
+                res.send({success: false, data: result[0]});
             }
-            else {
-                res.send({success: true, data: doc});
+            else{
+                res.send({success: false, data: null});
             }
+        }).catch(function (error) {
+            res.send({success: false, reason: "error"});
+        });
+    };
+
+    controller.searchBusiness = function(req, res){
+        var search = req.params.search;
+        Session.query(Business).where(Business.name.Like("%" + search + "%")).then(function(result){
+            res.send({success: false, data: result});
+
+        }).catch(function (error) {
+            res.send({success: false, reason: "error"});
         });
     };
 
