@@ -7,7 +7,7 @@ module.exports =  function(app){
 
     controller.getAllBusiness = function(req, res){
         Session.query(Business).select().then(function(result){
-            res.send({success: false, data: result});
+            res.send({success: true, data: result});
         }).catch(function (error) {
             res.send({success: false, reason: "error"});
         });
@@ -17,10 +17,10 @@ module.exports =  function(app){
         var id = req.params.id;
         Session.query(Business).where(Business.id.Equal(id)).then(function(result){
             if (result.length){
-                res.send({success: false, data: result[0]});
+                res.send({success: true, data: result[0]});
             }
             else{
-                res.send({success: false, data: null});
+                res.send({success: true, data: null});
             }
         }).catch(function (error) {
             res.send({success: false, reason: "error"});
@@ -30,7 +30,7 @@ module.exports =  function(app){
     controller.searchBusiness = function(req, res){
         var search = req.params.search;
         Session.query(Business).where(Business.name.Like("%" + search + "%")).then(function(result){
-            res.send({success: false, data: result});
+            res.send({success: true, data: result});
 
         }).catch(function (error) {
             res.send({success: false, reason: "error"});
