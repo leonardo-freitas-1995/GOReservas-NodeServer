@@ -1,6 +1,6 @@
 module.exports =  function(app){
 
-    return app.db.tableMap('User')
+    return app.db.tableMap('business')
         .columnMap('id', 'id', { isAutoIncrement: true })
         .columnMap('owner', 'owner')
         .columnMap('name', 'name')
