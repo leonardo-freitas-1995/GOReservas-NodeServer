@@ -1,5 +1,6 @@
 var passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy
+    encryption = require('../server/services/encryption');;
 
 module.exports = function (app) {
     var User = app.models.user;
@@ -7,7 +8,7 @@ module.exports = function (app) {
 
     passport.use(new LocalStrategy(
         function (username, password, done) {
-            Session.query(User).where(User.email.Equal(email)).then(function(result){
+            Session.query(User).where(User.email.Equal(username)).then(function(result){
                 if (result.length){
                     var user = result[0];
                     if (user.password === encryption.hashPwd(user.salt, password)){
@@ -21,7 +22,7 @@ module.exports = function (app) {
                     done(null, false);
                 }
             }).catch(function (error) {
-                res.send({success: false});
+                done(null, false);
             });
         }
     ));
