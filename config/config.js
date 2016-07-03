@@ -6,12 +6,22 @@ var rootPath = path.normalize(__dirname + '/../');
 module.exports = {
     development: {
         rootPath: rootPath,
-        db: 'mongodb://localhost/goreservas',
+        db: {
+            host: "localhost:3306",
+            user: "goreservas",
+            password: "g0r3s3rv4s",
+            database: "goreservas"
+        },
         port: process.env.PORT || 3030
     },
     production: {
         rootPath: rootPath,
-        db: 'mongodb://localhost/goreservas',
-        port: process.env.PORT || 443
+        db: {
+            host: "localhost:3306",
+            user: "goreservas",
+            password: "g0r3s3rv4s",
+            database: "goreservas"
+        },
+        port: process.env.PORT || 80
     }
 };
