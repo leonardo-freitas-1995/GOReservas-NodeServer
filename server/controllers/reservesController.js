@@ -38,7 +38,6 @@ module.exports =  function(app){
             .then(function(){
                 res.send({success: true});
             }).catch(function(error) {
-            console.log(error);
             res.send({success: false, reason: "error"});
         });
     };
