@@ -1,75 +1,74 @@
-var encryption = require('../services/encryption'),
-emailAgent = require('../services/emailAgent');
+var encryption = require('../services/encryption');
 
 
 module.exports =  function(app){
 
     var User = app.models.user;
+    var Session = app.db;
 
     var controller = {};
 
-    controller.startAccount = function (req, res, next){
-        var email = req.params.email;
-        var salt = encryption.createSalt();
-        var token = encryption.randomPassword();
-        var userData = {
-            email: email,
-            salt: salt,
-            password: encryption.hashPwd(salt, token),
-            role: "client",
-            name: req.params.email
-        };
-        User.findOne({email: email}).exec(function(err, doc){
-            if (doc){
-                return res.send({success: false, reason: 'signup.error.alreadyRegister'});
+    controller.createAccount = function (req, res, next){
+        var userData = req.body;
+        userData.salt = encryption.createSalt();
+        userData.password = encryption.hashPwd(userData.salt, userData.password);
+        userData.role = "client";
+
+        Session.query(User).where(User.email.Equal(userData.email)).then(function(result){
+            if (result.length){
+                res.send({success: false, reason: "duplicated"});
             }
             else{
-                User.create(userData);
-                sendEmailInvite();
-                return res.send({success: true});
+                User.Insert(userData).then(function(){
+                   res.send({success: true});
+                }).catch(function (error) {
+                    console.log(error);
+                    res.send({success: false, reason: "error"});
+                });
             }
+        }).catch(function (error) {
+            console.log(error);
+            res.send({success: false, reason: "error"});
         });
+    };
 
-        function sendEmailInvite(){
-            emailAgent.sendEmail(
-                email,
-                "GOReservas - Criação de Conta",
-                "Bem vindo ao GOReservas!",
-                'http://' + req.headers.host
-            );
-        }
+    controller.authenticateUser = function (req, res) {
+        var email = req.body.email;
+        var password = req.body.password;
+
+        Session.query(User).where(User.email.Equal(email)).then(function(result){
+            if (result.length){
+                var user = result[0];
+                if (user.password === encryption.hashPwd(user.salt, password)){
+                    res.send({success: true});
+                }
+                else{
+                    res.send({success: false});
+                }
+            }
+            else{
+                res.send({success: false});
+            }
+        }).catch(function (error) {
+            res.send({success: false});
+        });
     };
 
     controller.updateUser = function (req, res) {
-        var userUpdates = req.body;
-
-        User.findById(userUpdates._id, function(err, data) {
-            if (err) {
-                res.status(400);
-                return res.send({success: false, reason: "common.connectionError"});
-            }
-
-            if (userUpdates.password && userUpdates.password.length > 0) {
-                data.salt = encryption.createSalt();
-                data.password = encryption.hashPwd(data.salt, userUpdates.password);
-            }
-
-            data.name = userUpdates.name || data.name;
-            data.email = userUpdates.email || data.email;
-            data.email = data.email.toLowerCase();
-            data.set('invitationDate', null);
-
-            data.save(function (err) {
-                if (err) {
-                    res.status(400);
-                    return res.send({success: false, reason: "common.connectionError"});
-                }
-
-                data.salt = undefined;
-                data.password = undefined;
-
-                res.send(data);
-            });
+        var email = req.params.email;
+        var userData = req.body;
+        var passwordQuery = "";
+        if (userData.password !== ""){
+            var salt = encryption.createSalt();
+            var password = encryption.hashPwd(salt, userData.password);
+            passwordQuery = ",salt='" + salt + "',password='" + password + "'";
+        }
+        Session.executeSql("UPDATE user SET name='" + userData.name + "'" + passwordQuery + " WHERE email='" + email + "'")
+            .then(function(){
+                res.send({success: true});
+        }).catch(function(error) {
+            console.log(error);
+            res.send({success: false, reason: "error"});
         });
     };
 
