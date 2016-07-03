@@ -2,9 +2,9 @@ var auth = require('../../config/auth');
 
 module.exports = function (app) {
 
-    var reserves = app.controllers.reservesController;
-    
-    app.put('/api/business/', reserves.createBusiness);
-    app.delete('/api/business/:id', reserves.deleteBusiness);
-    app.get('/api/business/', reserves.getBusiness);
+    var business = app.controllers.businessController;
+
+    app.get('/api/business/', business.getAllBusiness);
+    app.get('/api/business/:id', business.getBusiness);
+    app.get('/api/business/:client/:search', business.searchBusiness);
 };

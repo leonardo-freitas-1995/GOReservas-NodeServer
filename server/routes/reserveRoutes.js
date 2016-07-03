@@ -6,5 +6,5 @@ module.exports = function (app) {
     
     app.put('/api/reserve/', reserves.createReserve);
     app.delete('/api/reserve/:id', reserves.cancelReserve);
-    app.put('/api/reserve/:id', reserves.confirmReserve);
+    app.get('/api/reserve/:id', reserves.getReserves);
 };
