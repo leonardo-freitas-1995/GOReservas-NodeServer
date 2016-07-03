@@ -26,15 +26,12 @@
     "express-session": "1.11.3",
     "helmet": "0.12.0",
     "jade": "1.11.0",
+    "js-hibernate": "^1.0.14",
     "method-override": "2.3.5",
-    "mongo-sanitize": "1.0.0",
-    "mongoose": "3.8.31",
     "morgan": "^1.7.0",
-    "nodemailer": "^2.3.2",
     "passport": "0.3.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "uuid": "^2.0.2"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }
