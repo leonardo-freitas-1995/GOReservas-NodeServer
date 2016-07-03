@@ -1,9 +1,9 @@
 var http = require('http');
 var env = process.env.NODE_ENV || 'development';
 var config = require('./config/config')[env];
-var app = require('./config/express')(config);
-require('./config/database')(app, config);
-require('./config/passport')();
+var db = require('./config/database')(config);
+var app = require('./config/express')(config, db);
+require('./config/passport')(app);
 
 
 http.createServer(app).listen(app.get('port'), function(){
