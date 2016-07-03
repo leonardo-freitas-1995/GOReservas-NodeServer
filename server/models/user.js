@@ -1,28 +1,10 @@
-var mongoose = require('mongoose'),
-    encryption = require('../services/encryption');
+module.exports =  function(app){
 
-module.exports =  function(){
+    return app.db.tableMap('User')
+        .columnMap('id', 'id')
+        .columnMap('name', 'name')
+        .columnMap('salt', 'salt')
+        .columnMap('password', 'password')
+        .columnMap('role', 'role');
 
-    var userSchema = mongoose.Schema({
-        name: String,
-        email: {
-            type: String,
-            unique: true
-        },
-        salt: String,
-        password: String,
-        role: String
-    });
-
-    userSchema.methods = {
-        authenticate: function (passwordToMatch) {
-            return encryption.hashPwd(this.salt, passwordToMatch) === this.password;
-        },
-        hasRole: function(role) {
-            return this.roles.indexOf(role) > -1;
-        }
-    };
-
-
-    return mongoose.model('User', userSchema);
 };

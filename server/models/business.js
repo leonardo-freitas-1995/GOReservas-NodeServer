@@ -1,30 +1,14 @@
-var mongoose = require('mongoose');
+module.exports =  function(app){
 
-module.exports =  function(){
-
-    var businessSchema = mongoose.Schema({
-        owner: {
-            type: mongoose.Schema.ObjectId,
-            ref: 'user'
-        },
-        name: String,
-        CNPJ: {
-            type: Number,
-            unique: true
-        },
-        sizeLimit: Number,
-        minPerReserve: Number,
-        maxPerReserve: Number,
-        autoAccept: Boolean,
-        pricePerReserve: Number,
-        pricePerPerson: Number,
-        rating: number,
-        blacklist: [{
-            type: mongoose.Schema.ObjectId,
-            ref: 'user'
-        }]
-    });
-
-
-    return mongoose.model('Business', businessSchema);
+    return app.db.tableMap('User')
+        .columnMap('owner', 'owner')
+        .columnMap('name', 'name')
+        .columnMap('CNPJ', 'CNPJ')
+        .columnMap('sizeLimit', 'sizeLimit')
+        .columnMap('minPerReserve', 'minPerReserve')
+        .columnMap('maxPerReserve', 'maxPerReserve')
+        .columnMap('autoAccept', 'autoAccept')
+        .columnMap('pricePerReserve', 'pricePerReserve')
+        .columnMap('pricePerPerson', 'pricePerPerson')
+        .columnMap('rating', 'rating');
 };

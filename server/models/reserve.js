@@ -1,24 +1,13 @@
-var mongoose = require('mongoose');
-
 module.exports =  function(){
 
-    var reserveSchema = mongoose.Schema({
-        client: {
-            type: mongoose.Schema.ObjectId,
-            ref: 'user'
-        },
-        business: {
-            type: mongoose.Schema.ObjectId,
-            ref: 'business'
-        },
-        date: Date,
-        observation: String,
-        showedUp: Boolean,
-        quantity: Number,
-        confirmed: Boolean,
-        totalValue: Number
-    });
-
-
-    return mongoose.model('Reserve', reserveSchema);
+    return app.db.tableMap('User')
+        .columnMap('client', 'client')
+        .columnMap('business', 'business')
+        .columnMap('date', 'date')
+        .columnMap('observation', 'observation')
+        .columnMap('showedUp', 'showedUp')
+        .columnMap('quantity', 'quantity')
+        .columnMap('confirmed', 'confirmed')
+        .columnMap('totalValue', 'totalValue');
+    
 };
