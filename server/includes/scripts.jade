@@ -1,5 +1,4 @@
-//- build:js public/src/js/app.js
-// * Vendor
+// * Vendor (Third-Party APIs)
 script(type="text/javascript", src="/vendor/jquery/dist/jquery.min.js")
 script(type="text/javascript", src="/vendor/Materialize/dist/js/materialize.min.js")
 script(type="text/javascript", src="/vendor/angular/angular.min.js")
@@ -12,3 +11,18 @@ script(type="text/javascript", src="/vendor/angular-materialize/src/angular-mate
 script(type="text/javascript", src="/js/app.js")
 // *** Routes Config
 script(type="text/javascript", src="/js/routes.js")
+
+// * Controllers
+// *** Main
+script(type="text/javascript", src="/js/controllers/main/ngMainCtrl.js")
+
+// * Services
+// *** Auth
+script(type="text/javascript", src="/js/services/auth/ngUser.js")
+script(type="text/javascript", src="/js/services/auth/ngIdentity.js")
+script(type="text/javascript", src="/js/services/auth/ngAuth.js")
+// *** Tools
+script(type="text/javascript", src="/js/services/tools/ngNotifier.js")
+script(type="text/javascript", src="/js/services/tools/ngScriptLoad.js")
+script(type="text/javascript", src="/js/services/tools/ngDynamicInjector.js")
+script(type="text/javascript", src="/js/services/tools/ngLayout.js")
