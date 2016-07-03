@@ -1,44 +1,54 @@
-    module.exports =  function(app){
+module.exports =  function(app){
 
     var Reserve = app.models.reserve;
+    var Business = app.models.business;
+    var Session = app.db;
 
     var controller = {};
 
-    controller.createReserve = function (req, res) {
+    controller.createReserve = function(req, res){
         var reserveData = req.body;
-        Reserve.create(reserveData, function(err, newReserve){
-            if (err){
-                return res.send({success: false});
+        reserveData.showedUp = false;
+        reserveData.confirmed = false;
+
+        Session.query(Business).where(Business.id.Equal(reserveData.business)).then(function(result){
+            if (result.length){
+                var businessDoc = result[0];
+                if (businessDoc.autoAccept){
+                    reserveData.confirmed = true;
+                }
+                Reserve.Insert(reserveData).then(function(){
+                    res.send({success: true, confirmed: reserveData.confirmed});
+                }).catch(function (error) {
+                    res.send({success: false, reason: "error"});
+                });
             }
             else{
-                return res.send({success: true});
-            }
-        })
-    };
-
-    controller.cancelReserve = function (req, res) {
-        var reserveId = req.params.id;
-        Reserve.remove({_id: reserveId}).exec(function(err, doc){
-            if (err){
                 res.send({success: false});
             }
-            else {
+        }).catch(function (error) {
+            res.send({success: false, reason: "error"});
+        });
+
+    };
+
+    controller.cancelReserve = function(req, res){
+        var id = req.params.id;
+        Session.executeSql("DELETE FROM reserve WHERE id='" + id + "'")
+            .then(function(){
                 res.send({success: true});
-            }
+            }).catch(function(error) {
+            console.log(error);
+            res.send({success: false, reason: "error"});
         });
     };
 
-    controller.confirmReserve = function (req, res) {
-        var reserveId = req.params.id;
-        Reserve.findOne({_id: reserveId}).exec(function(err, doc){
-            if (err){
-                res.send({success: false});
-            }
-            else {
-                doc.confirmed = true;
-                doc.save();
-                res.send({success: true});
-            }
+    controller.getReserves = function(req, res){
+        var id = req.params.id;
+        Session.query(Reserve).where(Reserve.client.Equal(id)).then(function(result){
+            res.send({success: true, data: result});
+        }).catch(function (error) {
+            res.send({success: false, reason: "error"});
         });
     };
 
