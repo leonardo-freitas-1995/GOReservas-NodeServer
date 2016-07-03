@@ -1,17 +1,27 @@
 var passport = require('passport'),
-    mongoose = require('mongoose'),
-    LocalStrategy = require('passport-local').Strategy,
-    User = mongoose.model('User');
+    LocalStrategy = require('passport-local').Strategy;
 
-module.exports = function () {
+module.exports = function (app) {
+    var User = app.models.user;
+    var Session = app.db;
+
     passport.use(new LocalStrategy(
         function (username, password, done) {
-            User.findOne({email: username}).exec(function (err, user) {
-                if (user && user.authenticate(password)) {
-                    return done(null, user);
-                } else {
-                    return done(null, false);
+            Session.query(User).where(User.email.Equal(email)).then(function(result){
+                if (result.length){
+                    var user = result[0];
+                    if (user.password === encryption.hashPwd(user.salt, password)){
+                        return done(null, user);
+                    }
+                    else{
+                        done(null, false);
+                    }
                 }
+                else{
+                    done(null, false);
+                }
+            }).catch(function (error) {
+                res.send({success: false});
             });
         }
     ));

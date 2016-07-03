@@ -13,9 +13,10 @@ var express =  require('express')
 
 //Environment setup
 
-module.exports = function(config){
+module.exports = function(config, db){
 
 var app = express();
+	app.db = db;
 
 		app.set('port',config.port);
 
