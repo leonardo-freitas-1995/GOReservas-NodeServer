@@ -29,17 +29,20 @@ module.exports = function (app) {
 
     passport.serializeUser(function (user, done) {
         if (user) {
-            done(null, user._id);
+            done(null, user.id);
         }
     });
 
     passport.deserializeUser(function (id, done) {
-        User.findOne({_id: id}).exec(function (err, user) {
-            if (user) {
-                return done(null, user);
-            } else {
-                return done(null, false);
+        Session.query(User).where(User.id.Equal(id)).then(function(result){
+            if (result.length){
+                done(null, user);
             }
+            else{
+                done(null, false);
+            }
+        }).catch(function (error) {
+            done(null, false);
         });
     });
 };
