@@ -1,5 +1,5 @@
 (function() {
-    angular.module('goreservas', ['ngRoute', 'ngResource']);
+    angular.module('goreservas', ['ngRoute', 'ngResource', 'ui.materialize']);
 
     angular
         .module('goreservas')

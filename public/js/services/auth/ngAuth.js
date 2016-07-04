@@ -44,7 +44,7 @@
                 } else {
                     return $q.reject('not authorized');
                 }
-            },
+            }
             
         };
     }

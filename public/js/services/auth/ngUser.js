@@ -6,7 +6,7 @@
     function Service($resource) {
         var UserResource = $resource(
             '/api/users/:email',
-            {email: "@email"},
+            {},
             {update: {method: 'PUT', isArray: false}}
         );
 

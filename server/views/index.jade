@@ -2,12 +2,31 @@ extends ../includes/layout
 
 .wrapper
     block main-content
-      .main-content
+        .main-content
 
-      .sidenav
-      .main-view
-          section.content
-              div(ng-view)
+        #navbar.navbar-fixed.scrollspy
+            nav.white
+                .nav-wrapper.container
+                    .container
+                        a.brand-logo(href='#navbar') GOReservas
+                    a.button-collapse(href='#', data-activates='mobile-demo')
+                        i.mdi-navigation-menu
+                    ul.right.hide-on-med-and-down
+                        li
+                            a.head-link(href='#register', scrolling-link) Registrar
+                        li
+                            a.head-link.modal-trigger(href='#loginModal' modal) Entrar
+                    ul#mobile-demo.right.side-nav
+                        li
+                            a.head-link(href='#register', scrolling-link) Registrar
+                        li
+                            a.head-link(href='#loginModal' modal) Entrar
+        .main-view
+            section.content
+                div(ng-view)
 
-      footer.page-footer
+        footer.page-footer.red
+            .footer-copyright
+                .container
+                    p Copyright © GOReservas
 

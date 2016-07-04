@@ -1,0 +1,99 @@
+#index-banner.parallax-container
+    .section.no-pad-bot.light-mask-bg
+        .container
+            br
+            br
+            h1.header.center.red-text.text-darken-4 GOReservas
+            .row.center
+                h5.header.col.s12.light O maior sistema de reservas de entretenimento e restaurantes de Goiás!
+            br
+            br
+    .parallax(parallax)
+        img(src='/images/index-cover-1.jpg', alt='Unsplashed background img 2')
+.container
+    .section
+        // Icon Section
+        .row
+            .col.s12.m4
+                .icon-block
+                    h2.center(style='color:#333')
+                        i.fa.fa-fw.fa-2x.fa-calendar-plus-o
+                    h5.center Reservas
+                    p.light
+                        | Com pouco esforço o usuário consegue realizar sua reserva, e o estabelecimento rapidamente consegue saber a demanda de clientes
+            .col.s12.m4
+                .icon-block
+                    h2.center(style='color:#333')
+                        i.fa.fa-fw.fa-2x.fa-users
+                    h5.center Gerenciamento
+                    p.light
+                        | O estabelecimento possui acesso as reservas feitas e consegue gerenciar demandas e o funcionamento da casa
+            .col.s12.m4
+                .icon-block
+                    h2.center(style='color:#333')
+                        i.fa.fa-fw.fa-2x.fa-star
+                    h5.center Avaliação
+                    p.light
+                        | Com avaliações dos próprios usuários, você conseguirá saber qual o melhor lugar para se divertir ou ter uma boa refeição
+
+#aboutus.parallax-container.valign-wrapper.section.scrollspy
+    .section.no-pad-bot.dark-mask-bg
+        .container
+            .center.row.col.s3
+                h3.white-text Sobre Nós
+            .center.row.col.s12
+                p.white-text
+                    | Criado na por alunos da UFG na tentativa de facilitar a vida do cidadão goiano, o GOReservas possui uma vasta quantidade de parceiros, garantindo sua reserva em poucos cliques!
+    .parallax(parallax)
+        img(src='/images/index-cover-2.jpg', alt='img')
+#register.container.section.scrollspy
+    .section
+        br
+        br
+        h2 Criar Conta
+        .row
+            form.col.s8
+                .row
+                    .input-field.col.s6
+                        input#email.validate(type='email', ng-model="vm.newAccount.email", required)
+                        label(for='email') Seu Email
+                    .input-field.col.s6
+                        input#password.validate(type='password', ng-model="vm.newAccount.password", required)
+                        label(for='password') Sua Senha
+                // row
+                .row
+                    .input-field.col.s12
+                        input#name.validate(type='text', ng-model="vm.newAccount.name", required)
+                        label(for='name') Nome Completo
+                div
+                    a.waves-effect.waves-light.btn.red(ng-click="vm.register()") Registrar
+                    br
+
+            .col.s12.m4
+                p
+                    | Você pode nos encontrar também nas redes sociais!
+                ul.share-buttons
+                    li
+                        a(href='#!', target='_blank', title='Facebook')
+                            i.fa.fa-fw.fa-facebook
+                    li
+                        a(href='#!', target='_blank', title='Twitter')
+                            i.fa.fa-fw.fa-twitter
+                    li
+                        a(href='#!', target='_blank', title='Google+')
+                            i.fa.fa-fw.fa-google-plus
+
+#loginModal.modal
+    .modal-content
+        h4 Login
+        .row
+            .input-field.col.s6
+                input#login-email.validate(type='email', ng-model="vm.account.email", required)
+                label(for='login-email') Email
+            .input-field.col.s6
+                input#login-pasword.validate(type='password', ng-model="vm.account.password", required)
+                label(for='login-pasword') Senha
+        // row
+    .modal-footer
+        button.btn-flat(ng-click="vm.login()") Entrar
+
