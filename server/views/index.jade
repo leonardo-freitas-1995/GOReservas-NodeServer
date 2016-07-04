@@ -4,47 +4,65 @@ extends ../includes/layout
     block main-content
         .main-content
 
-        #navbar.navbar-fixed.scrollspy
-            nav.white
-                .nav-wrapper.container
-                    .container
-                        a.brand-logo(href='/index') GOReservas
-                    a.button-collapse(href='#', data-activates='mobile-demo')
-                        i.mdi-navigation-menu
-                    div(ng-if="!layout.isAuthenticated()")
-                        ul.right.hide-on-med-and-down
-                            li
-                                a.head-link(href='#register', scrolling-link) Registrar
-                            li
-                                a.head-link.modal-trigger(href='#loginModal' modal) Entrar
-                        ul#mobile-demo.right.side-nav
-                            li
-                                a.head-link(href='#register', scrolling-link) Registrar
-                            li
-                                a.head-link(href='#loginModal' modal) Entrar
-                    div(ng-if="layout.isAuthenticated()")
-                        ul.right.hide-on-med-and-down
-                            li
-                                // Dropdown Trigger
-                                a.dropdown-button(href='#', data-activates='dropdown1')
-                                    | {{layout.getUserFirstName()}}
-                                    i.fa.fa-fw.fa-caret-down
-                                // Dropdown Structure
-                                ul#dropdown1.dropdown-content
-                                    li
-                                        a(href='profile.html')
-                                            i.fa.fw-fw.fa-user.secondary-content
-                                            |  Perfil
-                                    li
-                                        a(href='../index.html')
-                                            i.fa.fa-fw.fa-sign-out.secondary-content
-                                            |  Sair
+        div(ng-controller="ngNavbarCtrl as navbarVm")
+            #navbar.navbar-fixed.scrollspy
+                nav(ng-class="{'white': !layout.hasSidenav(), 'red lighten-1': layout.hasSidenav()}")
+                    .nav-wrapper.container
+                        .container
+                            a.brand-logo(href='/index', ng-class="{'white-text': layout.hasSidenav()}") GOReservas
+                        a.button-collapse(href='#', data-activates='mobile-demo')
+                            i.mdi-navigation-menu
+                        div(ng-show="!layout.isAuthenticated()")
+                            ul.right.hide-on-med-and-down
+                                li
+                                    a.head-link(href='#register', scrolling-link) Registrar
+                                li
+                                    a.head-link.modal-trigger(href='#loginModal' modal) Entrar
+                            ul#mobile-demo.right.side-nav
+                                li
+                                    a.head-link(href='#register', scrolling-link) Registrar
+                                li
+                                    a.head-link(href='#loginModal' modal) Entrar
+                        div(ng-show="layout.isAuthenticated()")
+                            ul.right.hide-on-med-and-down
+                                li
+                                    // Dropdown Trigger
+                                    a.dropdown-button.white-text(href='#', data-activates='dropdownUser', dropdown)
+                                        | {{layout.getUserFirstName()}}
+                                        i.fa.fa-fw.fa-caret-down
+                                    // Dropdown Structure
+                                    ul#dropdownUser.dropdown-content
+                                        li
+                                            a(href='profile.html')
+                                                i.fa.fw-fw.fa-user.secondary-content
+                                                |  Perfil
+                                        li
+                                            a(href='#!', ng-click="navbarVm.logout()")
+                                                i.fa.fa-fw.fa-sign-out.secondary-content
+                                                |  Sair
 
-        main
+            ul#slide-out.side-nav.fixed(ng-show="layout.hasSidenav()")
+                li.active
+                    a(href='dashboard-client.html')
+                        b
+                            i.fa.fa-fw.fa-home
+                            |  Início
+                li
+                    a(href='calendar.html')
+                        b
+                            i.fa.fa-fw.fa-calendar
+                            |  Minhas Reservas
+                li
+                    a(href='search.html')
+                        b
+                            i.fa.fa-fw.fa-search
+                            |  Procurar
+
+        main(ng-class="{'sidenav-main': layout.hasSidenav()}")
             section.content
                 div(ng-view)
 
-        footer.page-footer.red
+        footer.page-footer.red(ng-class="{'sidenav-footer': layout.hasSidenav()}")
             .footer-copyright
                 .container
                     p Copyright © GOReservas

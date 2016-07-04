@@ -2,8 +2,8 @@
     angular
         .module('goreservas')
         .factory('ngLayout', Service);
-    Service.$inject = ['ngIdentity'];
-    function Service(ngIdentity) {
+    Service.$inject = ['$location', 'ngIdentity'];
+    function Service($location, ngIdentity) {
         return {
             isAuthenticated: function() {
                 return ngIdentity.isAuthenticated();
@@ -17,6 +17,13 @@
 
                 var name = ngIdentity.currentUser.name;
                 return name.substring(0, name.indexOf(" "));
+            },
+            hasSidenav: function(){
+                var sidenavPaths = [
+                    "/dashboard"  
+                ];
+                var path = $location.path();
+                return sidenavPaths.contains(path);
             }
         };
     }
