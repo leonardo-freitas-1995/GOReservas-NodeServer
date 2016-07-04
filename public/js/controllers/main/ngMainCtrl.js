@@ -2,8 +2,8 @@
     angular
         .module('goreservas')
         .controller('ngMainCtrl', Controller);
-    Controller.$inject = ['ngNotifier', 'ngAuth', 'ngUserSvc'];
-    function Controller(ngNotifier, ngAuth, ngUserSvc) {
+    Controller.$inject = ['$location', 'ngNotifier', 'ngAuth', 'ngUserSvc'];
+    function Controller($location, ngNotifier, ngAuth, ngUserSvc) {
         var vm = this;
 
         vm.newAccount = {};
@@ -41,6 +41,8 @@
             ngAuth.authenticateUser(vm.account.email, vm.account.password).then(function(success){
                 if (success){
                     ngNotifier.success("Logado no sistema com sucesso.");
+                    angular.element("#loginModal").closeModal();
+                    $location.path("/dashboard");
                 }
                 else{
                     ngNotifier.error("As credenciais de acesso não conferem.");

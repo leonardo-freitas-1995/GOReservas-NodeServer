@@ -11,6 +11,7 @@
                     if (response.data.success) {
                         var user = new ngUser();
                         angular.extend(user, response.data.user);
+                        console.log(user);
                         ngIdentity.currentUser = user;
                         dfd.resolve(true);
                     } else {
@@ -43,6 +44,14 @@
                     return true;
                 } else {
                     return $q.reject('not authorized');
+                }
+            },
+
+            authorizeNotAuthenticatedUserForRoute: function () {
+                if (!ngIdentity.isAuthenticated()) {
+                    return true;
+                } else {
+                    return $q.reject('already authenticated');
                 }
             }
             

@@ -8,20 +8,39 @@ extends ../includes/layout
             nav.white
                 .nav-wrapper.container
                     .container
-                        a.brand-logo(href='#navbar') GOReservas
+                        a.brand-logo(href='/index') GOReservas
                     a.button-collapse(href='#', data-activates='mobile-demo')
                         i.mdi-navigation-menu
-                    ul.right.hide-on-med-and-down
-                        li
-                            a.head-link(href='#register', scrolling-link) Registrar
-                        li
-                            a.head-link.modal-trigger(href='#loginModal' modal) Entrar
-                    ul#mobile-demo.right.side-nav
-                        li
-                            a.head-link(href='#register', scrolling-link) Registrar
-                        li
-                            a.head-link(href='#loginModal' modal) Entrar
-        .main-view
+                    div(ng-if="!layout.isAuthenticated()")
+                        ul.right.hide-on-med-and-down
+                            li
+                                a.head-link(href='#register', scrolling-link) Registrar
+                            li
+                                a.head-link.modal-trigger(href='#loginModal' modal) Entrar
+                        ul#mobile-demo.right.side-nav
+                            li
+                                a.head-link(href='#register', scrolling-link) Registrar
+                            li
+                                a.head-link(href='#loginModal' modal) Entrar
+                    div(ng-if="layout.isAuthenticated()")
+                        ul.right.hide-on-med-and-down
+                            li
+                                // Dropdown Trigger
+                                a.dropdown-button(href='#', data-activates='dropdown1')
+                                    | {{layout.getUserFirstName()}}
+                                    i.fa.fa-fw.fa-caret-down
+                                // Dropdown Structure
+                                ul#dropdown1.dropdown-content
+                                    li
+                                        a(href='profile.html')
+                                            i.fa.fw-fw.fa-user.secondary-content
+                                            |  Perfil
+                                    li
+                                        a(href='../index.html')
+                                            i.fa.fa-fw.fa-sign-out.secondary-content
+                                            |  Sair
+
+        main
             section.content
                 div(ng-view)
 

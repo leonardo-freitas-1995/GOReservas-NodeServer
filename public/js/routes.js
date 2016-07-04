@@ -9,7 +9,8 @@
         function AuthService(ngAuth){
             var authType = {
                 owner: ngAuth.authorizeCurrentUserForRoute('owner'),
-                user: ngAuth.authorizeAuthenticatedUserForRoute()
+                user: ngAuth.authorizeAuthenticatedUserForRoute(),
+                notuser: ngAuth.authorizeNotAuthenticatedUserForRoute()
             };
             if (!authType[role])
                 return false;
@@ -37,7 +38,18 @@
         .when('/index',{
             templateUrl: '/partials/main/main',
             controller: 'ngMainCtrl',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            resolve: {
+                auth: routeRoleCheck('notuser')
+            }
+        })
+        .when('/dashboard',{
+            templateUrl: '/partials/dashboard/dashboard',
+            controller: 'ngDashboardCtrl',
+            controllerAs: 'vm',
+            resolve: {
+                auth: routeRoleCheck('user')
+            }
         })
         .otherwise({
             redirectTo: '/index'

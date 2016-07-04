@@ -34,6 +34,9 @@
             if (rejection === 'not authorized') {
                 $location.path('/index');
             }
+            else if (rejection === 'already authenticated'){
+                $location.path('/dashboard');
+            }
         });
     }
 
