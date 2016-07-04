@@ -14,6 +14,8 @@ exports.authenticate = function (req, res, next) {
             if (err) {
                 return next(err);
             }
+            delete user.salt;
+            delete user.password;
             res.send({success: true, user: user});
         });
     });
