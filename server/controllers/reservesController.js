@@ -38,6 +38,10 @@ module.exports =  function(app){
 
     controller.cancelReserve = function(req, res){
         var id = req.params.id;
+        var date = new Date(req.params.date);
+        if ((new Date()).getTime() > date.getTime()){
+            return res.send({success: false, reason: "ahead of time"});
+        }
         Session.executeSql("DELETE FROM reserve WHERE id='" + id + "'")
             .then(function(){
                 res.send({success: true});

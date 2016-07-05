@@ -49,6 +49,21 @@
                 );
 
                 return dfd.promise;
+            },
+            cancelReserve: function(id, date){
+                var reserve = new ngReserve();
+
+                var dfd = $q.defer();
+                reserve.$delete({id: id, date: date}).then(
+                    function(response){
+                        dfd.resolve(response);
+                    },
+                    function(){
+                        dfd.reject({success: false, reason: "error"});
+                    }
+                );
+
+                return dfd.promise;
             }
         }
     }

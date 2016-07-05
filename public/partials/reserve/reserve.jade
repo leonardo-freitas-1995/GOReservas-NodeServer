@@ -32,3 +32,15 @@ div(ng-if="vm.loaded")
                 br
                 small
                     a(ng-href="{{vm.makeMapsLink(vm.reserve.business)}}", style='color:#0000FF;text-align:left', target='_blank') Ver maior
+        br
+        .center-align(ng-if="vm.isBeforeReserve(vm.reserve.date)")
+            a.btn.red(href="#cancelModal", modal) Cancelar Reserva
+            br
+            br
+
+#cancelModal.modal
+    .modal-content
+        h5 Deseja mesmo cancelar esta reserva?
+    .modal-footer
+        button.btn-flat.modal-action.modal-close Não
+        button.btn.red(ng-click="vm.cancelReserve()") Sim
