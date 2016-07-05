@@ -19,12 +19,14 @@
                         .card-image
                             a(ng-href="/business?id={{business.id}}")
                                 img(ng-src='{{business.imageURL}}', style='height: 220px; width: 100%;')
-                        .card-content.right-align
-                            span(rating-star="{model: business.rating, rating: 1}")
-                            span(rating-star="{model: business.rating, rating: 2}")
-                            span(rating-star="{model: business.rating, rating: 3}")
-                            span(rating-star="{model: business.rating, rating: 4}")
-                            span(rating-star="{model: business.rating, rating: 5}")
+                        .card-content
+                            span {{business.name}}
+                                .right-align
+                                    span(rating-star="{model: business.rating, rating: 1}")
+                                    span(rating-star="{model: business.rating, rating: 2}")
+                                    span(rating-star="{model: business.rating, rating: 3}")
+                                    span(rating-star="{model: business.rating, rating: 4}")
+                                    span(rating-star="{model: business.rating, rating: 5}")
         section.col.m4.grey.lighten-5
             .input-field
                 input.validate(type='text', ng-model="vm.search.term")

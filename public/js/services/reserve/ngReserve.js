@@ -7,7 +7,8 @@
         var ReserveResource = $resource(
             '/api/reserve/:id/:client/:search',
             {},
-            {update: {method: 'PUT', isArray: false}}
+            {update: {method: 'PUT', isArray: false},
+            search: {method: 'SEARCH', isArray: false}}
         );
 
         return ReserveResource;

@@ -36,6 +36,21 @@
                 );
 
                 return dfd.promise;
+            },
+            getBestBusiness: function (id) {
+                var business = new ngBusiness();
+
+                var dfd = $q.defer();
+                business.$get().then(
+                    function(response){
+                        dfd.resolve(response);
+                    },
+                    function(){
+                        dfd.reject({success: false, reason: "error"});
+                    }
+                );
+
+                return dfd.promise;
             }
         }
     }

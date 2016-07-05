@@ -1,1 +1,32 @@
-h5 Dashboard
+.container(ng-if="vm.bestBusiness.length")
+    h5 Últimas reservas
+    hr
+    h5(ng-if="!vm.lastReserves.length")
+        small Você ainda não realizou nenhuma reserva. Indicamos abaixo os estabelecimentos mais bem votados do GOReservas
+    .row(ng-if="vm.lastReserves.length")
+        .col.m4.business-card(ng-repeat="reserve in vm.lastReserves")
+            .card
+                .card-image
+                    a(ng-href="/reserve?id={{reserve.id}}")
+                        img(ng-src='{{reserve.business.imageURL}}', style='height: 220px; width: 100%;')
+                .card-content
+                    span {{reserve.business.name}}
+                    .right-align
+                        spann {{reserve.date}}
+.container(ng-if="vm.bestBusiness.length")
+    h5 Estabelecimentos recomendados
+    hr
+    .row
+        .col.m4.business-card(ng-repeat="business in vm.bestBusiness")
+            .card
+                .card-image
+                    a(ng-href="/business?id={{business.id}}")
+                        img(ng-src='{{business.imageURL}}', style='height: 220px; width: 100%;')
+                .card-content
+                    span {{business.name}}
+                    .right-align
+                        span(rating-star="{model: business.rating, rating: 1}")
+                        span(rating-star="{model: business.rating, rating: 2}")
+                        span(rating-star="{model: business.rating, rating: 3}")
+                        span(rating-star="{model: business.rating, rating: 4}")
+                        span(rating-star="{model: business.rating, rating: 5}")

@@ -2,8 +2,21 @@
     angular
         .module('goreservas')
         .controller('ngDashboardCtrl', Controller);
-    Controller.$inject = [];
-    function Controller() {
+    Controller.$inject = ['ngBusinessSvc', 'ngReserveSvc', 'ngIdentity'];
+    function Controller(ngBusinessSvc, ngReserveSvc, ngIdentity) {
         var vm = this;
+
+        vm.bestBusiness = [];
+        vm.lastReserves = [];
+
+        (function(){
+            ngBusinessSvc.getBestBusiness().then(function(response){
+                vm.bestBusiness = response.data;
+            });
+            ngReserveSvc.getLastReserves(ngIdentity.currentUser.id).then(function(response){
+                vm.lastReserves = response.data;
+                console.log(response);
+            });
+        })()
     }
 })();
