@@ -4,6 +4,8 @@ module.exports =  function(app){
         .columnMap('id', 'id', { isAutoIncrement: true })
         .columnMap('owner', 'owner')
         .columnMap('name', 'name')
+        .columnMap('description', 'description')
+        .columnMap('businessType', 'businessType')
         .columnMap('CNPJ', 'CNPJ')
         .columnMap('sizeLimit', 'sizeLimit')
         .columnMap('minPerReserve', 'minPerReserve')
