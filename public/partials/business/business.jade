@@ -66,9 +66,8 @@ div(ng-if="vm.loaded")
                     | Total da reserva:
                 .col.m2.s4
                     .chip R${{vm.getTotalReserve()}}
-            small Não inclui gastos no local. O preço aqui é apenas informativo, o pagamento é realizado no local.
+            small Não inclui gastos extras no local. O preço aqui é apenas informativo, o pagamento é realizado no local.
 
-        span {{vm.newReserve}}
     .modal-footer
         button.btn.green(ng-click="vm.createReserve()") Reservar
-        button.btn-flat.modal-action.modal-close Entrar
+        button.btn-flat.modal-action.modal-close Cancelar

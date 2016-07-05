@@ -2,8 +2,8 @@
     angular
         .module('goreservas')
         .controller('ngBusinessCtrl', Controller);
-    Controller.$inject = ['$timeout', '$sce', '$location', 'ngBusinessSvc', 'ngNotifier'];
-    function Controller($timeout, $sce, $location, ngBusinessSvc, ngNotifier) {
+    Controller.$inject = ['$timeout', '$sce', '$location', 'ngBusinessSvc', 'ngReserveSvc', 'ngNotifier', 'ngIdentity'];
+    function Controller($timeout, $sce, $location, ngBusinessSvc, ngReserveSvc, ngNotifier, ngIdentity) {
         var vm = this;
 
         vm.business = null;
@@ -34,15 +34,36 @@
 
         vm.createReserve = function(){
             if (!vm.newReserve.day || !vm.newReserve.hour || !vm.newReserve.quantity){
-                ngNotifier.error("Preencha os campos corretament");
+                ngNotifier.error("Preencha os campos corretamente");
                 return false;
             }
             vm.newReserve.date = new Date(vm.newReserve.day + " " + vm.newReserve.hour);
-            vm.newReserve.total = vm.getTotalReserve();
+            vm.newReserve.totalValue = vm.getTotalReserve();
+            vm.newReserve.business = parseInt($location.search().id);
+            vm.newReserve.client = ngIdentity.currentUser.id;
+            ngReserveSvc.createReserve(vm.newReserve).then(function(response){
+                console.log(response);
+                if (response.success){
+                    if (response.confirmed){
+                        ngNotifier.success("Sua reserva foi criada e confirmada com sucesso.");
+                        angular.element("#reserveModal").closeModal();
+                    }
+                    else{
+                        ngNotifier.success("Sua reserva foi criada, e está pendente sujeita a confirmação.");
+                        angular.element("#reserveModal").closeModal();
+                    }
+                }
+                else{
+                    ngNotifier.error("Não foi possível completar o pedido.");
+                }
+            },
+            function(){
+                ngNotifier.error("Não foi possível completar o pedido.");
+            });
         };
 
         vm.newReserve = {
-            total: 0
+            totalValue: 0
         };
 
         (function(){

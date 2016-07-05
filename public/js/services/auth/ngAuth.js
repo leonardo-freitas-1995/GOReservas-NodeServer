@@ -11,7 +11,6 @@
                     if (response.data.success) {
                         var user = new ngUser();
                         angular.extend(user, response.data.user);
-                        console.log(user);
                         ngIdentity.currentUser = user;
                         dfd.resolve(true);
                     } else {

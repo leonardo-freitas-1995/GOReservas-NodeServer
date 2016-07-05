@@ -8,18 +8,20 @@ module.exports =  function(app){
 
     controller.createReserve = function(req, res){
         var reserveData = req.body;
-        reserveData.showedUp = false;
-        reserveData.confirmed = false;
+        reserveData.showedUp = 0;
+        reserveData.confirmed = 0;
+        console.log(reserveData);
 
         Session.query(Business).where(Business.id.Equal(reserveData.business)).then(function(result){
             if (result.length){
                 var businessDoc = result[0];
                 if (businessDoc.autoAccept){
-                    reserveData.confirmed = true;
+                    reserveData.confirmed = 1;
                 }
                 Reserve.Insert(reserveData).then(function(){
                     res.send({success: true, confirmed: reserveData.confirmed});
                 }).catch(function (error) {
+                    console.log(error);
                     res.send({success: false, reason: "error"});
                 });
             }
