@@ -16,6 +16,8 @@
                     return "";
 
                 var name = ngIdentity.currentUser.name;
+                if (name.indexOf(" ") === -1)
+                    return name;
                 return name.substring(0, name.indexOf(" "));
             },
             hasSidenav: function(){
@@ -24,7 +26,8 @@
                     "/business",
                     "/search-business",
                     "/reserve",
-                    "/calendar"
+                    "/calendar",
+                    "/profile"
                 ];
                 var path = $location.path();
                 return sidenavPaths.contains(path);

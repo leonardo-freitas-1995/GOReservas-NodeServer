@@ -1,0 +1,19 @@
+.container
+    br
+    .card-panel.grey.lighten-3
+        .row
+            .input-field.col.s12
+                input.validate(type='text', ng-model="vm.account.name")
+                label Nome Completo
+        .row
+            .input-field.col.s6
+                input.validate(type='password', ng-model="vm.account.password")
+                label Senha
+            .input-field.col.s6
+                input.validate(type='password', ng-model="vm.account.repeatPassword")
+                label Repita a Senha
+            small Deixe o campo de senha em branco caso não deseje altera-la
+
+        div
+            a.waves-effect.waves-light.btn.red(ng-click="vm.updateUser()") Salvar
+            br

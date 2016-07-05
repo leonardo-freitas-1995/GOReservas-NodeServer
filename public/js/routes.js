@@ -75,6 +75,14 @@
                 auth: routeRoleCheck('user')
             }
         })
+        .when('/profile',{
+            templateUrl: '/partials/profile/profile',
+            controller: 'ngProfileCtrl',
+            controllerAs: 'vm',
+            resolve: {
+                auth: routeRoleCheck('user')
+            }
+        })
         .otherwise({
             redirectTo: '/index'
         });

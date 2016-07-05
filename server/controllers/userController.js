@@ -63,8 +63,11 @@ module.exports =  function(app){
             var password = encryption.hashPwd(salt, userData.password);
             passwordQuery = ",salt='" + salt + "',password='" + password + "'";
         }
+        else{
+            delete userData.password;
+        }
         Session.executeSql("UPDATE user SET name='" + userData.name + "'" + passwordQuery + " WHERE email='" + email + "'")
-            .then(function(){
+            .then(function(result){
                 res.send({success: true});
         }).catch(function(error) {
             res.send({success: false, reason: "error"});
