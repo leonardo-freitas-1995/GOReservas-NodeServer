@@ -20,6 +20,21 @@
 
                 return dfd.promise;
             },
+            getReserves: function(id){
+                var reserve = new ngReserve();
+
+                var dfd = $q.defer();
+                reserve.$get({id: id}).then(
+                    function(response){
+                        dfd.resolve(response);
+                    },
+                    function(){
+                        dfd.reject({success: false, reason: "error"});
+                    }
+                );
+
+                return dfd.promise;
+            },
             getLastReserves: function(id){
                 var reserve = new ngReserve();
 

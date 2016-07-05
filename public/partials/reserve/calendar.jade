@@ -1,0 +1,46 @@
+.container
+    br
+    .month
+        ul
+            li.prev(ng-click="vm.prevMonth()") ❮
+            li.next(ng-click="vm.nextMonth()") ❯
+            li.center-align
+                | {{vm.monthNames[vm.calendar.month]}}
+                br
+                span(style='font-size:18px') {{vm.calendar.year}}
+    ul.weekdays
+        li Dom
+        li Seg
+        li Ter
+        li Qua
+        li Qui
+        li Sex
+        li Sab
+
+    ul.days
+        li(ng-repeat="day in vm.days", ng-class="{'black-text': day.month === vm.calendar.month, 'active': day.number === vm.today.day && day.month === vm.today.month && day.year === vm.today.year}")
+            | {{day.number}}
+            br
+            a(ng-if="vm.hasReserveToday(day)",
+                href="#modalReserves", modal,
+                ng-click="vm.separateReserves(day)")
+                i.fa.fa-fw.fa-circle
+    br
+    .center-align
+        button.btn.blue(ng-click="vm.goToToday()") Hoje
+    br
+    br
+#modalReserves.modal
+    .modal-content
+        h5.center-align Reservas para o dia {{vm.modalTodayDate | date:'dd/MM/yyyy'}}
+        hr
+        .row
+            .col.m4.business-card(ng-repeat="reserve in vm.todayReserves")
+                .card
+                    .card-image
+                        a.modal-action.modal-close(ng-href="/reserve?id={{reserve.id}}")
+                            img(ng-src='{{reserve.business.imageURL}}', style='height: 220px; width: 100%;')
+                    .card-content
+                        span {{reserve.business.name}}
+                        .right-align
+                            span.grey-text {{reserve.date | date:'dd/MM/yyyy - HH:mm'}}
