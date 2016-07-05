@@ -1,3 +1,34 @@
-//
-   Created by Leonardo on 05/07/2016.
-
+.center-align(ng-if="!vm.loaded")
+    br
+    i.fa.fa-fw.fa-5x.fa-spinner.fa-spin
+div(ng-if="vm.loaded")
+    h5.center-align(ng-if="!vm.reserve")
+        | Esta página não foi encontrada.
+    .container(ng-if="vm.reserve")
+        h5 Dados da Reserva
+        hr
+        div
+            b Estabelecimento:
+            = ' '
+            a(ng-href="/business?id={{vm.reserve.business.id}}") {{vm.reserve.business.name}}
+        div
+            b Data/Hora:
+            = ' '
+            span {{vm.reserve.date | date:'dd/MM/yyyy - HH:mm'}}
+        div
+            b Valor da reserva:
+            = ' '
+            span R${{vm.reserve.totalValue}}
+        div
+            b Situação da reserva:
+            = ' '
+            span(ng-if="!vm.reserve.confirmed") Esperando confirmação
+            span(ng-if="vm.reserve.confirmed")
+                span(ng-if="!vm.reserve.showedUp") Reserva confirmada
+                span(ng-if="vm.reserve.showedUp") Reserva utilizada
+        div
+            b Mapa para Estabelecimento:
+            iframe(width='100%', height='400px', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', ng-src="{{vm.makeMapsLink(vm.reserve.business)}}")
+                br
+                small
+                    a(ng-href="{{vm.makeMapsLink(vm.reserve.business)}}", style='color:#0000FF;text-align:left', target='_blank') Ver maior

@@ -15,7 +15,6 @@
             });
             ngReserveSvc.getLastReserves(ngIdentity.currentUser.id).then(function(response){
                 vm.lastReserves = response.data;
-                console.log(response);
             });
         })()
     }

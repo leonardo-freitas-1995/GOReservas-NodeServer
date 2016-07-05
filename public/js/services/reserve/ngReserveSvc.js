@@ -34,6 +34,21 @@
                 );
 
                 return dfd.promise;
+            },
+            getOneReserve: function(client, id){
+                var reserve = new ngReserve();
+
+                var dfd = $q.defer();
+                reserve.$get({client: client, id: id}).then(
+                    function(response){
+                        dfd.resolve(response);
+                    },
+                    function(){
+                        dfd.reject({success: false, reason: "error"});
+                    }
+                );
+
+                return dfd.promise;
             }
         }
     }

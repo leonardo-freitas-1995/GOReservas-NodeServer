@@ -46,6 +46,26 @@ module.exports =  function(app){
         });
     };
 
+    controller.getOneReserve = function(req, res){
+        var client = req.params.client;
+        var id = req.params.id;
+        Session.executeSql("SELECT * FROM reserve WHERE client = '" + client + "' AND id = '" + id + "'").then(function(result){
+            if (result.length === 0){
+                return res.send({success: false, reason: "error"});
+            }
+            var reserve = result[0];
+            Session.executeSql("SELECT id,name,rating,imageURL,latitude,longitude FROM business WHERE id = '" + reserve.business + "'")
+                .then(function(businessResult){
+                    reserve.business = businessResult[0];
+                    res.send({success: true, data: reserve});
+                }).catch(function (error) {
+                res.send({success: false, reason: "error"});
+            });
+        }).catch(function (error) {
+            res.send({success: false, reason: "error"});
+        });
+    };
+
     controller.getReserves = function(req, res){
         var id = req.params.id;
         Session.executeSql("SELECT * FROM reserve WHERE client = '" + id + "' ORDER BY date DESC").then(function(result){
@@ -73,6 +93,7 @@ module.exports =  function(app){
             res.send({success: false, reason: "error"});
         });
     };
+
     controller.getLastReserves = function(req, res){
         var id = req.params.id;
         Session.executeSql("SELECT * FROM reserve WHERE client = '" + id + "' ORDER BY date DESC LIMIT 3").then(function(result){

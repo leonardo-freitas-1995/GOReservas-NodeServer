@@ -22,7 +22,9 @@
                 var sidenavPaths = [
                     "/dashboard",
                     "/business",
-                    "/search-business"
+                    "/search-business",
+                    "/reserve",
+                    "/calendar"
                 ];
                 var path = $location.path();
                 return sidenavPaths.contains(path);
