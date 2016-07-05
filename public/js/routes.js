@@ -75,6 +75,14 @@
                 auth: routeRoleCheck('user')
             }
         })
+        .when('/calendar',{
+            templateUrl: '/partials/reserve/calendar',
+            controller: 'ngCalendarCtrl',
+            controllerAs: 'vm',
+            resolve: {
+                auth: routeRoleCheck('user')
+            }
+        })
         .when('/profile',{
             templateUrl: '/partials/profile/profile',
             controller: 'ngProfileCtrl',
