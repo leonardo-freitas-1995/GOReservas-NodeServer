@@ -52,6 +52,9 @@
                         angular.element("#reserveModal").closeModal();
                     }
                 }
+                else if (response.reason === "ahead of time"){
+                    ngNotifier.error("É preciso fazer reservas com uma hora de antedecências.");
+                }
                 else{
                     ngNotifier.error("Não foi possível completar o pedido.");
                 }
