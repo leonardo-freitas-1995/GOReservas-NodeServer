@@ -42,17 +42,17 @@ extends ../includes/layout
                                                 |  Sair
 
             ul#slide-out.side-nav.fixed(ng-show="layout.hasSidenav()")
-                li.active
+                li(ng-class="{'active': layout.isActive('/dashboard')}")
                     a(href='/dashboard')
                         b
                             i.fa.fa-fw.fa-home
                             |  Início
-                li
+                li(ng-class="{'active': layout.isActive('/calendar')}")
                     a(href='/calendar')
                         b
                             i.fa.fa-fw.fa-calendar
                             |  Minhas Reservas
-                li
+                li(ng-class="{'active': layout.isActive('/search-business')}")
                     a(href='/search-business')
                         b
                             i.fa.fa-fw.fa-search

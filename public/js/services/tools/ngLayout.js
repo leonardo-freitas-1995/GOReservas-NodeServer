@@ -26,6 +26,9 @@
                 ];
                 var path = $location.path();
                 return sidenavPaths.contains(path);
+            },
+            isActive: function(path){
+                return $location.path() === path;
             }
         };
     }
