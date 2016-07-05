@@ -15,7 +15,7 @@ module.exports =  function(app){
 
     controller.getBusiness = function(req, res){
         var id = req.params.id;
-        Session.query(Business).where(Business.id.Equal(id)).then(function(result){
+        Session.executeSql("SELECT * FROM business WHERE id='" + id + "'").then(function(result){
             if (result.length){
                 res.send({success: true, data: result[0]});
             }

@@ -21,6 +21,9 @@
     "angular": "~1.5.7",
     "angular-resource": "~1.5.7",
     "angular-route": "~1.5.7",
-    "angular-materialize": "~0.1.9"
+    "angular-materialize": "~0.1.9",
+    "angular-ui-map": "~0.5.0",
+    "angular-ui-event": "~1.0.0",
+    "materialize-clockpicker": "*"
   }
 }

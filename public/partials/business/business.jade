@@ -1,0 +1,74 @@
+.center-align(ng-if="!vm.loaded")
+    br
+    i.fa.fa-fw.fa-5x.fa-spinner.fa-spin
+div(ng-if="vm.loaded")
+    h5.center-align(ng-if="!vm.business")
+        | Esta página não foi encontrada.
+    .container(ng-if="vm.business")
+        br
+        .row.grey.lighten-4
+            .col.m4
+                img.white.responsive-img.circle(ng-src="{{vm.business.imageURL}}")
+            .col.m8
+                .row
+                    h4.col.m8.red-text {{vm.business.name}}
+                    .col.m4.center-align
+                        br
+                        span(rating-star="{model: vm.business.rating, rating: 1}")
+                        span(rating-star="{model: vm.business.rating, rating: 2}")
+                        span(rating-star="{model: vm.business.rating, rating: 3}")
+                        span(rating-star="{model: vm.business.rating, rating: 4}")
+                        span(rating-star="{model: vm.business.rating, rating: 5}")
+                p {{vm.business.description}}
+        iframe(width='100%', height='400px', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', ng-src="{{vm.makeMapsLink(vm.business)}}")
+            br
+            small
+                a(ng-href="{{vm.makeMapsLink(vm.business)}}", style='color:#0000FF;text-align:left', target='_blank') Ver maior
+        br
+        br
+        .row
+            .col.m12.center-align
+                button.btn.green(href="#reserveModal", modal) Realizar Reserva
+
+#reserveModal.modal
+    .modal-content
+        h4 Realizar Reserva
+        .row
+            .input-field.col.m8.s12
+                input.datepicker(input-date, format="dd/mm/yyyy", type='text', ng-model="vm.newReserve.day", required)
+                label Data
+        .row
+            .input-field.col.m8.s12
+                input.timepicker(ng-init="vm.initClockpicker()", type='text', ng-model="vm.newReserve.hour", required)
+                label Hora
+        .row
+            .input-field.col.m8.s12
+                input.validate(type='number', ng-model="vm.newReserve.quantity", min="{{vm.business.minPerReserve}}", max="{{vm.business.maxPerReserve}}", required)
+                label Pessoas (Entre {{vm.business.minPerReserve}} e {{vm.business.maxPerReserve}})
+        .row
+            .input-field.col.m8.s12
+                textarea.materialize-textarea(ng-model="vm.newReserve.observation")
+                label Observações
+        br
+        p
+            .row
+                .col.m3.s8
+                    | Preço por reserva:
+                .col.m2.s4
+                    .chip R${{vm.business.pricePerReserve}}
+            .row
+                .col.m3.s8
+                    | Preço por pessoa:
+                .col.m2.s4
+                    .chip R${{vm.business.pricePerPerson}}
+            .row
+                .col.m3.s8
+                    | Total da reserva:
+                .col.m2.s4
+                    .chip R${{vm.getTotalReserve()}}
+            small Não inclui gastos no local. O preço aqui é apenas informativo, o pagamento é realizado no local.
+
+        span {{vm.newReserve}}
+    .modal-footer
+        button.btn.green(ng-click="vm.createReserve()") Reservar
+        button.btn-flat.modal-action.modal-close Entrar

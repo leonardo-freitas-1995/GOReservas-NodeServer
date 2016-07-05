@@ -51,6 +51,14 @@
                 auth: routeRoleCheck('user')
             }
         })
+        .when('/business',{
+            templateUrl: '/partials/business/business',
+            controller: 'ngBusinessCtrl',
+            controllerAs: 'vm',
+            resolve: {
+                //auth: routeRoleCheck('user')
+            }
+        })
         .otherwise({
             redirectTo: '/index'
         });

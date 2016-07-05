@@ -20,7 +20,8 @@
             },
             hasSidenav: function(){
                 var sidenavPaths = [
-                    "/dashboard"  
+                    "/dashboard",
+                    "/business"
                 ];
                 var path = $location.path();
                 return sidenavPaths.contains(path);
