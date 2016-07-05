@@ -67,6 +67,14 @@
                 auth: routeRoleCheck('user')
             }
         })
+        .when('/reserve',{
+            templateUrl: '/partials/reserve/reserve',
+            controller: 'ngReserveCtrl',
+            controllerAs: 'vm',
+            resolve: {
+                auth: routeRoleCheck('user')
+            }
+        })
         .otherwise({
             redirectTo: '/index'
         });
