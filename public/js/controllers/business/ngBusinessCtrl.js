@@ -37,12 +37,11 @@
                 ngNotifier.error("Preencha os campos corretamente");
                 return false;
             }
-            vm.newReserve.date = new Date(vm.newReserve.day + " " + vm.newReserve.hour);
+            vm.newReserve.date = vm.newReserve.day.split("/").reverse().join("-") + " " + vm.newReserve.hour + ":00";
             vm.newReserve.totalValue = vm.getTotalReserve();
             vm.newReserve.business = parseInt($location.search().id);
             vm.newReserve.client = ngIdentity.currentUser.id;
             ngReserveSvc.createReserve(vm.newReserve).then(function(response){
-                console.log(response);
                 if (response.success){
                     if (response.confirmed){
                         ngNotifier.success("Sua reserva foi criada e confirmada com sucesso.");

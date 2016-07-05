@@ -10,7 +10,6 @@ module.exports =  function(app){
         var reserveData = req.body;
         reserveData.showedUp = 0;
         reserveData.confirmed = 0;
-        console.log(reserveData);
 
         Session.query(Business).where(Business.id.Equal(reserveData.business)).then(function(result){
             if (result.length){
@@ -21,7 +20,6 @@ module.exports =  function(app){
                 Reserve.Insert(reserveData).then(function(){
                     res.send({success: true, confirmed: reserveData.confirmed});
                 }).catch(function (error) {
-                    console.log(error);
                     res.send({success: false, reason: "error"});
                 });
             }
@@ -36,7 +34,7 @@ module.exports =  function(app){
 
     controller.cancelReserve = function(req, res){
         var id = req.params.id;
-        Session.executeSql("DELETE FROM reserve WHERE id='" + id + "'")
+        Session.executeSql("DELETE FROM reserve WHERE id='" + id + "' ORDER BY date DESC")
             .then(function(){
                 res.send({success: true});
             }).catch(function(error) {
@@ -54,7 +52,7 @@ module.exports =  function(app){
             for (var r = 0; r < result.length; r++){
                 allBusiness.push(result[r].business);
             }
-            Session.executeSql("SELECT id,name,rating,imageURL FROM business WHERE id IN (" + allBusiness.join(", ") + ")")
+            Session.executeSql("SELECT id,name,rating,imageURL FROM business WHERE id IN (" + allBusiness.join(", ") + ") ORDER BY date DESC")
                 .then(function(businessResult){
                     var businessIndex = [];
                     for (var r = 0; r < businessResult.length; r++){
