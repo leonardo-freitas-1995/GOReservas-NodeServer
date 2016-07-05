@@ -9,6 +9,8 @@ module.exports =  function(app){
         .columnMap('showedUp', 'showedUp')
         .columnMap('quantity', 'quantity')
         .columnMap('confirmed', 'confirmed')
-        .columnMap('totalValue', 'totalValue');
+        .columnMap('totalValue', 'totalValue')
+        .columnMap('rated', 'rated')
+        .columnMap('rating', 'rating');
 
 };

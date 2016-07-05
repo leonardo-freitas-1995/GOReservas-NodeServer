@@ -8,6 +8,8 @@
 
         vm.reserve = null;
 
+        vm.rating = 0;
+
         vm.makeMapsLink = function(business){
             return $sce.trustAsResourceUrl("https://maps.google.com/maps?q=" + business.latitude + "," + business.longitude + "&hl=es;z=14&output=embed");
         };
@@ -37,12 +39,28 @@
                 });
         };
 
+        vm.rateReserve = function(){
+            ngReserveSvc.rateReserve(vm.reserve.id, vm.reserve.business.id, vm.rating).then(function(response){
+                    if (response.success){
+                        ngNotifier.success("Reserva avaliada com sucesso");
+                        vm.reserve.rated = true;
+                    }
+                    else{
+                        ngNotifier.error("Não foi possível completar esta ação.");
+                    }
+                },
+                function(){
+                    ngNotifier.error("Não foi possível completar esta ação");
+                });
+        };
+
         (function(){
             var id = $location.search().id;
             if (id && id !== ""){
                 ngReserveSvc.getOneReserve(ngIdentity.currentUser.id, id).then(function(response){
                         vm.reserve = response.data;
-                        console.log(response.data);
+                        if (vm.reserve.rated)
+                            vm.rating = vm.reserve.rating;
                         vm.loaded = true;
                     },
                     function(){

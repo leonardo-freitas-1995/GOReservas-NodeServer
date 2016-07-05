@@ -13,6 +13,7 @@ module.exports =  function(app){
         .columnMap('autoAccept', 'autoAccept')
         .columnMap('pricePerReserve', 'pricePerReserve')
         .columnMap('pricePerPerson', 'pricePerPerson')
+        .columnMap('avaliations', 'avaliations')
         .columnMap('rating', 'rating')
         .columnMap('latitude', 'latitude')
         .columnMap('longitude', 'longitude')

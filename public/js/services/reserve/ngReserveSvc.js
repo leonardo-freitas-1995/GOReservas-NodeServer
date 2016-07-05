@@ -20,6 +20,21 @@
 
                 return dfd.promise;
             },
+            rateReserve: function (id, business, rating) {
+                var reserve = new ngReserve({rating: rating});
+
+                var dfd = $q.defer();
+                reserve.$save({id: id, business: business}).then(
+                    function(response){
+                        dfd.resolve(response);
+                    },
+                    function(){
+                        dfd.reject({success: false, reason: "error"});
+                    }
+                );
+
+                return dfd.promise;
+            },
             getReserves: function(id){
                 var reserve = new ngReserve();
 

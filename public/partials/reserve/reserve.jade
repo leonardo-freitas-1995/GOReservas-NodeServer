@@ -7,25 +7,43 @@ div(ng-if="vm.loaded")
     .container(ng-if="vm.reserve")
         h5 Dados da Reserva
         hr
-        div
-            b Estabelecimento:
-            = ' '
-            a(ng-href="/business?id={{vm.reserve.business.id}}") {{vm.reserve.business.name}}
-        div
-            b Data/Hora:
-            = ' '
-            span {{vm.reserve.date | date:'dd/MM/yyyy - HH:mm'}}
-        div
-            b Valor da reserva:
-            = ' '
-            span R${{vm.reserve.totalValue}}
-        div
-            b Situação da reserva:
-            = ' '
-            span(ng-if="!vm.reserve.confirmed") Esperando confirmação
-            span(ng-if="vm.reserve.confirmed")
-                span(ng-if="!vm.reserve.showedUp") Reserva confirmada
-                span(ng-if="vm.reserve.showedUp") Reserva utilizada
+        .row
+            .col.m8
+                div
+                    b Estabelecimento:
+                    = ' '
+                    a(ng-href="/business?id={{vm.reserve.business.id}}") {{vm.reserve.business.name}}
+                div
+                    b Data/Hora:
+                    = ' '
+                    span {{vm.reserve.date | date:'dd/MM/yyyy - HH:mm'}}
+                div
+                    b Valor da reserva:
+                    = ' '
+                    span R${{vm.reserve.totalValue}}
+                div
+                    b Situação da reserva:
+                    = ' '
+                    span(ng-if="!vm.reserve.confirmed") Esperando confirmação
+                    span(ng-if="vm.reserve.confirmed")
+                        span(ng-if="!vm.reserve.showedUp") Reserva confirmada
+                        span(ng-if="vm.reserve.showedUp") Reserva utilizada
+            .col.m4.center-align(ng-if="vm.reserve.showedUp")
+                div(ng-if="!vm.reserve.rated")
+                    span.pointer(ng-click="vm.rating = 1", rating-star="{model: vm.rating, rating: 1}")
+                    span.pointer(ng-click="vm.rating = 2", rating-star="{model: vm.rating, rating: 2}")
+                    span.pointer(ng-click="vm.rating = 3", rating-star="{model: vm.rating, rating: 3}")
+                    span.pointer(ng-click="vm.rating = 4", rating-star="{model: vm.rating, rating: 4}")
+                    span.pointer(ng-click="vm.rating = 5", rating-star="{model: vm.rating, rating: 5}")
+                    br
+                    button.btn-flat(ng-click="vm.rateReserve()") Avaliar
+
+                div(ng-if="vm.reserve.rated")
+                    span(rating-star="{model: vm.rating, rating: 1}")
+                    span(rating-star="{model: vm.rating, rating: 2}")
+                    span(rating-star="{model: vm.rating, rating: 3}")
+                    span(rating-star="{model: vm.rating, rating: 4}")
+                    span(rating-star="{model: vm.rating, rating: 5}")
         div
             b Mapa para Estabelecimento:
             iframe(width='100%', height='400px', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', ng-src="{{vm.makeMapsLink(vm.reserve.business)}}")

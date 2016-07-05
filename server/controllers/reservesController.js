@@ -10,6 +10,7 @@ module.exports =  function(app){
         var reserveData = req.body;
         reserveData.showedUp = 0;
         reserveData.confirmed = 0;
+        reserveData.rated = 0;
         var fullDate = new Date(reserveData.date);
         if (fullDate.getTime() - (new Date()).getTime() < (1000*60*60)){
             return res.send({success: false, reason: "ahead of time"});
@@ -122,6 +123,45 @@ module.exports =  function(app){
                     res.send({success: false, reason: "error"});
                 });
 
+        }).catch(function (error) {
+            res.send({success: false, reason: "error"});
+        });
+    };
+    
+    controller.rateReserve = function(req, res){
+        var id = req.params.id;
+        var business = req.params.business;
+        var rating = req.body.rating;
+        Session.executeSql("SELECT * FROM reserve WHERE id = '" + id + "'").then(function(resultReserve){
+            if (resultReserve.length){
+                var reserve = resultReserve[0];
+                Session.executeSql("SELECT * FROM business WHERE id = '" + business + "'").then(function(resultBusiness){
+                    if (resultBusiness.length){
+                        var businessDoc = resultBusiness[0];
+                        var newRating = ((businessDoc.rating * businessDoc.avaliations) + rating) / (businessDoc.avaliations + 1);
+                        var newAvaliations = businessDoc.avaliations + 1;
+                        Session.executeSql("UPDATE reserve SET rated='1',rating='" + rating + "' WHERE id='" + id + "'").then(function(){
+                            Session.executeSql("UPDATE business SET avaliations='" + newAvaliations + "',rating='" + newRating + "' WHERE id='" + business + "'").then(function(){
+                                res.send({success: true});
+                            })
+                            .catch(function (error) {
+                                res.send({success: false, reason: "error"});
+                            });
+                        })
+                        .catch(function (error) {
+                            res.send({success: false, reason: "error"});
+                        });
+                    }
+                    else{
+                        res.send({success: false, reason: "error"});
+                    }
+                }).catch(function (error) {
+                    res.send({success: false, reason: "error"});
+                });
+            }
+            else{
+                res.send({success: false, reason: "error"});
+            }
         }).catch(function (error) {
             res.send({success: false, reason: "error"});
         });
