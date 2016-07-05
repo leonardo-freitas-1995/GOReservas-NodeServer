@@ -21,7 +21,8 @@
             hasSidenav: function(){
                 var sidenavPaths = [
                     "/dashboard",
-                    "/business"
+                    "/business",
+                    "/search-business"
                 ];
                 var path = $location.path();
                 return sidenavPaths.contains(path);

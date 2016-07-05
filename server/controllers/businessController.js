@@ -1,6 +1,6 @@
 module.exports =  function(app){
 
-    var Business = app.models.reserve;
+    var Business = app.models.business;
     var Session = app.db;
 
     var controller = {};
@@ -29,7 +29,13 @@ module.exports =  function(app){
 
     controller.searchBusiness = function(req, res){
         var search = req.params.search;
-        Session.query(Business).where(Business.name.Like("%" + search + "%")).then(function(result){
+        var filter = req.params.filter.split(",").filter(function(val){return val !== ""});
+        if (search === "%all%")
+            search = "";
+        var query = "SELECT id,name,rating,imageURL FROM business WHERE name LIKE '%" + search + "%' AND businessType IN (" + filter.join(", ") + ") ORDER BY rating DESC";
+        console.log(query);
+        Session.executeSql(query).then(function(result){
+            console.log(result);
             res.send({success: true, data: result});
 
         }).catch(function (error) {

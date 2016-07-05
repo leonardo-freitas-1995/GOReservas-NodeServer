@@ -20,6 +20,23 @@
 
                 return dfd.promise;
             },
+            searchBusiness: function(userId, search, filter){
+                if (search === "")
+                    search = "%all%";
+                var business = new ngBusiness();
+
+                var dfd = $q.defer();
+                business.$get({client: userId, search: search, filter: filter}).then(
+                    function(response){
+                        dfd.resolve(response);
+                    },
+                    function(){
+                        dfd.reject({success: false, reason: "error"});
+                    }
+                );
+
+                return dfd.promise;
+            }
         }
     }
 })();

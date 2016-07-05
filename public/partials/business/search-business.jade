@@ -1,0 +1,44 @@
+.container-fluid
+    .row
+        .col.m8
+            h4.center-align
+                | Procurando estabelecimentos
+                span(ng-if="vm.lastSearch !== ''")
+                    = ' '
+                    | por '{{vm.lastSearch}}'
+
+    .row
+        .col.m8
+            .center-align(ng-if="!vm.loaded")
+                i.fa.fa-fw.fa-5x.fa-spin.fa-spinner
+            h5.center-align(ng-if="vm.loaded && !vm.businessArray.length")
+                | Sua busca não retornou nenhum estabelecimento.
+            .row(ng-if="vm.loaded && vm.businessArray.length")
+                .col.m4.business-card(ng-repeat="business in vm.businessArray")
+                    .card
+                        .card-image
+                            a(ng-href="/business?id={{business.id}}")
+                                img(ng-src='{{business.imageURL}}', style='height: 220px; width: 100%;')
+                        .card-content.right-align
+                            span(rating-star="{model: business.rating, rating: 1}")
+                            span(rating-star="{model: business.rating, rating: 2}")
+                            span(rating-star="{model: business.rating, rating: 3}")
+                            span(rating-star="{model: business.rating, rating: 4}")
+                            span(rating-star="{model: business.rating, rating: 5}")
+        section.col.m4.grey.lighten-5
+            .input-field
+                input.validate(type='text', ng-model="vm.search.term")
+                label Pesquisar
+            p
+                input#restaurant-checkbox.filled-in(type='checkbox', ng-model="vm.search.filter[0]", ng-true-value='"\'restaurant\'"' ng-false-value="undefined")
+                label(for='restaurant-checkbox') Restaurantes
+            p
+                input#entertainment-checkbox.filled-in(type='checkbox', ng-model="vm.search.filter[1]", ng-true-value='"\'entertainment\'"' ng-false-value="undefined")
+                label(for='entertainment-checkbox') Entretenimento
+            p
+                input#other-checkbox.filled-in(type='checkbox', ng-model="vm.search.filter[2]", ng-true-value='"\'other\'"' ng-false-value="undefined")
+                label(for='other-checkbox') Outros
+            hr
+            button.btn.blue(ng-click="vm.makeSearch()") Buscar
+            br
+            br

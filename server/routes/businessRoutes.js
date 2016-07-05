@@ -6,5 +6,5 @@ module.exports = function (app) {
 
     app.get('/api/business/', business.getAllBusiness);
     app.get('/api/business/:id', business.getBusiness);
-    app.get('/api/business/:client/:search', business.searchBusiness);
+    app.get('/api/business/:client/:search/:filter', business.searchBusiness);
 };

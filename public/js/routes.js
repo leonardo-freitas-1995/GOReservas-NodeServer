@@ -56,7 +56,15 @@
             controller: 'ngBusinessCtrl',
             controllerAs: 'vm',
             resolve: {
-                //auth: routeRoleCheck('user')
+                auth: routeRoleCheck('user')
+            }
+        })
+        .when('/search-business',{
+            templateUrl: '/partials/business/search-business',
+            controller: 'ngSearchBusinessCtrl',
+            controllerAs: 'vm',
+            resolve: {
+                auth: routeRoleCheck('user')
             }
         })
         .otherwise({
