@@ -54,7 +54,7 @@
                 var reserve = new ngReserve();
 
                 var dfd = $q.defer();
-                reserve.$search({id: id}).then(
+                reserve.$update({id: id}).then(
                     function(response){
                         dfd.resolve(response);
                     },

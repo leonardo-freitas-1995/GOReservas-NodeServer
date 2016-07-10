@@ -9,5 +9,5 @@ module.exports = function (app) {
     app.delete('/api/reserve/:id/:date', reserves.cancelReserve);
     app.get('/api/reserve/:id', reserves.getReserves);
     app.get('/api/reserve/:id/:client', reserves.getOneReserve);
-    app.search('/api/reserve/:id', reserves.getLastReserves);
+    app.put('/api/reserve/:id', reserves.getLastReserves);
 };
