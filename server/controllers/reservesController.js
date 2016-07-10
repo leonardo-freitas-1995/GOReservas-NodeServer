@@ -29,7 +29,7 @@ module.exports =  function(app){
                 });
             }
             else{
-                res.send({success: false});
+                res.send({success: false, reason: "business not found"});
             }
         }).catch(function (error) {
             res.send({success: false, reason: "error"});
@@ -39,7 +39,7 @@ module.exports =  function(app){
 
     controller.cancelReserve = function(req, res){
         var id = req.params.id;
-        var date = new Date(req.params.date);
+        var date = new Date(parseInt(req.params.date));
         if ((new Date()).getTime() > date.getTime()){
             return res.send({success: false, reason: "ahead of time"});
         }

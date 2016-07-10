@@ -21,7 +21,7 @@
         };
 
         vm.cancelReserve = function(){
-            ngReserveSvc.cancelReserve(vm.reserve.id, vm.reserve.date).then(function(response){
+            ngReserveSvc.cancelReserve(vm.reserve.id, new Date(vm.reserve.date).getTime()).then(function(response){
                     if (response.success){
                         ngNotifier.success("Reserva cancelada com sucesso");
                         angular.element("#cancelModal").closeModal();
