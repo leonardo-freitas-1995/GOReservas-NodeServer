@@ -2,8 +2,8 @@
     angular
         .module('goreservas')
         .controller('ngSearchBusinessCtrl', Controller);
-    Controller.$inject = ['ngBusinessSvc', 'ngNotifier'];
-    function Controller(ngBusinessSvc, ngNotifier) {
+    Controller.$inject = ['ngBusinessSvc', 'ngNotifier', 'ngIdentity'];
+    function Controller(ngBusinessSvc, ngNotifier, ngIdentity) {
         var vm = this;
 
         vm.search = {
@@ -22,7 +22,7 @@
             }
             vm.lastSearch = vm.search.term;
             vm.loaded = false;
-            ngBusinessSvc.searchBusiness(1, vm.search.term,
+            ngBusinessSvc.searchBusiness(ngIdentity.currentUser.id, vm.search.term,
                 vm.search.filter)
                 .then(function(response){
                     vm.businessArray = response.data
