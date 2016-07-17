@@ -38,7 +38,7 @@ module.exports =  function(app){
             if (result.length){
                 var user = result[0];
                 if (user.password === encryption.hashPwd(user.salt, password)){
-                    res.send({success: true});
+                    res.send({success: true, data: user});
                 }
                 else{
                     res.send({success: false});
