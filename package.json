@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "",
-    "start": "nodemon --harmony_proxies server.js",
+    "start": "node server.js",
+    "start-dev": "nodemon server.js",
     "gulp": "gulp"
   },
   "repository": {
