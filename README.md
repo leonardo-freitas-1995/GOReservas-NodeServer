@@ -4,6 +4,7 @@ Projeto da matéria de Desenvolvimento de Software para Web 2016/1 da Universida
 
 ### Requisitos
 - Servidor Node.js
+- Bower instalado via NPM
 - MySQL Server
 
 ### Como configurar o ambiente
