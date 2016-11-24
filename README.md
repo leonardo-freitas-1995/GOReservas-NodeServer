@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/leonardo-freitas-1995/GOReservas-NodeServer.svg?branch=master)](https://travis-ci.org/leonardo-freitas-1995/GOReservas-NodeServer)
+
 # Go Reservas - Node Server 
 
 Projeto da matéria de Desenvolvimento de Software para Web 2016/1 da Universidade Federal de Goiás.
