@@ -20,15 +20,6 @@
         return AuthService;
     }
 
-    // Dynamic Dependencie injection
-    function dependencySolver(dependencies) {
-        LoadService.$inject = ['ngDynamicInjector'];
-        function LoadService(ngDynamicInjector) {
-            return ngDynamicInjector.load(dependencies);
-        }
-        return LoadService;
-    }
-
     RouteConfig.$inject = ['$routeProvider'];
     function RouteConfig($routeProvider){
 
