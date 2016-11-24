@@ -1,6 +1,5 @@
 module.exports =  function(app){
 
-    var Business = app.models.business;
     var Session = app.db;
 
     var controller = {};
