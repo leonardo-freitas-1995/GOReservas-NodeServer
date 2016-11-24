@@ -15,4 +15,4 @@ install:
 - npm install
 - bower install
 script:
-  - sonar-scanner -Dsonar.login=$SONAR_TOKEN
+  sonar-scanner -X -Dsonar.host.url=https://sonarqube.com -Dsonar.login=$SONAR_TOKEN
