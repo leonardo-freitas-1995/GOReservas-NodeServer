@@ -78,17 +78,17 @@ module.exports =  function(app){
                 return res.send({success: true, data: result});
             }
             var allBusiness = [];
-            for (var r = 0; r < result.length; r++){
-                allBusiness.push(result[r].business);
+            for (var a = 0; a < result.length; a++){
+                allBusiness.push(result[a].business);
             }
             Session.executeSql("SELECT id,name,rating,imageURL FROM business WHERE id IN (" + allBusiness.join(", ") + ")")
                 .then(function(businessResult){
                     var businessIndex = [];
-                    for (var r = 0; r < businessResult.length; r++){
-                        businessIndex[businessResult[r].id] = r;
+                    for (var b = 0; b < businessResult.length; b++){
+                        businessIndex[businessResult[b].id] = b;
                     }
-                    for (var r = 0; r < result.length; r++){
-                        result[r].business = businessResult[businessIndex[result[r].business]];
+                    for (var c = 0; c < result.length; c++){
+                        result[c].business = businessResult[businessIndex[result[c].business]];
                     }
                     res.send({success: true, data: result});
                 }).catch(function (error) {
@@ -106,17 +106,17 @@ module.exports =  function(app){
                 return res.send({success: true, data: result});
             }
             var allBusiness = [];
-            for (var r = 0; r < result.length; r++){
-                allBusiness.push(result[r].business);
+            for (var d = 0; d < result.length; d++){
+                allBusiness.push(result[d].business);
             }
             Session.executeSql("SELECT id,name,rating,imageURL FROM business WHERE id IN (" + allBusiness.join(", ") + ")")
                 .then(function(businessResult){
                     var businessIndex = [];
-                    for (var r = 0; r < businessResult.length; r++){
-                        businessIndex[businessResult[r].id] = r;
+                    for (var e = 0; e < businessResult.length; e++){
+                        businessIndex[businessResult[e].id] = e;
                     }
-                    for (var r = 0; r < result.length; r++){
-                        result[r].business = businessResult[businessIndex[result[r].business]];
+                    for (var f = 0; f < result.length; f++){
+                        result[f].business = businessResult[businessIndex[result[f].business]];
                     }
                     res.send({success: true, data: result});
                 }).catch(function (error) {
@@ -134,7 +134,6 @@ module.exports =  function(app){
         var rating = req.body.rating;
         Session.executeSql("SELECT * FROM reserve WHERE id = '" + id + "'").then(function(resultReserve){
             if (resultReserve.length){
-                var reserve = resultReserve[0];
                 Session.executeSql("SELECT * FROM business WHERE id = '" + business + "'").then(function(resultBusiness){
                     if (resultBusiness.length){
                         var businessDoc = resultBusiness[0];
