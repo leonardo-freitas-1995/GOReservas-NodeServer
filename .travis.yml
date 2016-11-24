@@ -16,3 +16,5 @@ install:
 - bower install
 script:
   sonar-scanner -X -Dsonar.host.url=https://sonarqube.com -Dsonar.login=$SONAR_TOKEN
+jdk:
+  - oraclejdk8
