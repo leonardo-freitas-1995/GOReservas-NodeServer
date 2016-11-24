@@ -70,7 +70,7 @@
 
         (function(){
             var id = $location.search().id;
-            if (id && id !== ""){
+            if (id && id !== undefined){
                 ngBusinessSvc.getBusiness(id).then(function(response){
                         vm.business = response.data;
                         vm.loaded = true;
