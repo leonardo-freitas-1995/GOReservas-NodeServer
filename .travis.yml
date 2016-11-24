@@ -1,20 +1,21 @@
 addons:
   sonarqube: true
+
 env:
   global:
     - secure: HUvN0dzkuwqJkTlNT+cQi8A8tfwIQJqGYrLG3Vo4B7Igv4ebWMdhSt+7vAEDhIl2UAPfQJy76AEr9eTw7431LE4hE9w2F/Aouexpyq27HIhjRi4OjP8AHQkFowMctU1GoEwvrsr+jrVeyxQHSELa6uMZR/NbkfbzFggiG+Pns8GXBxFI9v/n4BylGpbgLuZTyW86+XWOlg3pwH6Tp8miF5CuDGF7dXUQrZZjFBDjOZVCmoVMKhXZAkgkIlgPTr7SeZrDIDGl7SuuHBEk/Dt9kmsonxRINin6meN+1kdMihzpO+kBuZnQRRn+Za9kcBJzK3JjUHOJLK37W1h5nsHM1H/uivanVAc+HEUDxQhNKWpk/LQ9JIzbHoeCJwwyMT62c448JPu1X43z4A4lVCxXJ4eHO9RR1uvjwPJ5e3GTHrcOOCcko5c6h44VmVm/vvZb/lyn+nlAR+G0ogaZRiEi+4fjhNZGI7fhm1mSy9vBBtM4OZ1IP7bHhsRSKK9GUQjCXy9/ttsFbBsiiCyc671Du5QIJb7clJH6t77PoEmhB3X0oJXg7V9bH4XB2QbebczgKLV8auY90+l8VE8jPa3oeSCQQ9NkHHgOXQNpYaLuf8JuKqvsWGcZroMyBkD3XRa8fE39xqrcLj8di71mX3Z/TlTSmwkUKR+AubCxKFWgq1g=
   matrix:
     - NODE_VERSION=0.10
+
 language: java
 jdk:
   - oraclejdk8
-before_install:
-  - java -version
+
 install:
   - nvm install $NODE_VERSION
-#  - npm install bower
-#  - npm install
-#  - bower install
+  - npm install bower
+  - npm install
+  - bower install
 script:
   - nvm use $NODE_VERSION
   - sonar-scanner -X -Dsonar.host.url=https://sonarqube.com -Dsonar.login=$SONAR_TOKEN
