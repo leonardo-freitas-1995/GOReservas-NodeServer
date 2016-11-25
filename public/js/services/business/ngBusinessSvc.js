@@ -37,7 +37,7 @@
 
                 return dfd.promise;
             },
-            getBestBusiness: function (id) {
+            getBestBusiness: function () {
                 var business = new ngBusiness();
 
                 var dfd = $q.defer();
