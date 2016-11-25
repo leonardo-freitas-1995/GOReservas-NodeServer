@@ -5,7 +5,7 @@
     Directive.$inject = [];
     function Directive(){
         return {
-            link: function(scope, element, attrs) {
+            link: function(scope, element) {
                 element.click(function(e) {
                     e.preventDefault();
 
