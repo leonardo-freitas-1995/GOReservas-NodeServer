@@ -14,7 +14,7 @@ module.exports =  function(app){
                 res.send({success: true, data: null});
             }
         }).catch(function (error) {
-            res.send({success: false, reason: "error"});
+            res.send({success: false, reason: "error", error: error});
         });
     };
 
@@ -28,7 +28,7 @@ module.exports =  function(app){
             res.send({success: true, data: result});
 
         }).catch(function (error) {
-            res.send({success: false, reason: "error"});
+            res.send({success: false, reason: "error", error: error});
         });
     };
 
@@ -38,7 +38,7 @@ module.exports =  function(app){
             res.send({success: true, data: result});
 
         }).catch(function (error) {
-            res.send({success: false, reason: "error"});
+            res.send({success: false, reason: "error", error: error});
         });
     };
 
