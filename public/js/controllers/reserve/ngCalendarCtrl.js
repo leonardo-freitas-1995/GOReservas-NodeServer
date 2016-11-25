@@ -107,7 +107,7 @@
             }
         };
 
-        $scope.$watch(function(){return vm.calendar}, function(newValue, oldValue){
+        $scope.$watch(function(){return vm.calendar}, function(){
             vm.parsing = true;
             vm.days = [];
             var monthInit = new Date();
