@@ -56,7 +56,7 @@
 
         (function(){
             var id = $location.search().id;
-            if (id && id !== ""){
+            if (id){
                 ngReserveSvc.getOneReserve(ngIdentity.currentUser.id, id).then(function(response){
                         vm.reserve = response.data;
                         if (vm.reserve.rated)
