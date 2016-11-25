@@ -27,9 +27,6 @@
                 .then(function(response){
                     vm.businessArray = response.data
 ;                    vm.loaded = true;
-                },
-                function(){
-
                 });
         };
 
