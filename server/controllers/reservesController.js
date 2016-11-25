@@ -25,14 +25,14 @@ module.exports =  function(app){
                 Reserve.Insert(reserveData).then(function(){
                     res.send({success: true, confirmed: reserveData.confirmed});
                 }).catch(function (error) {
-                    res.send({success: false, reason: "error"});
+                    res.send({success: false, reason: "error", error: error});
                 });
             }
             else{
                 res.send({success: false, reason: "business not found"});
             }
         }).catch(function (error) {
-            res.send({success: false, reason: "error"});
+            res.send({success: false, reason: "error", error: error});
         });
 
     };
@@ -47,7 +47,7 @@ module.exports =  function(app){
             .then(function(){
                 res.send({success: true});
             }).catch(function(error) {
-            res.send({success: false, reason: "error"});
+            res.send({success: false, reason: "error", error: error});
         });
     };
 
@@ -64,10 +64,10 @@ module.exports =  function(app){
                     reserve.business = businessResult[0];
                     res.send({success: true, data: reserve});
                 }).catch(function (error) {
-                res.send({success: false, reason: "error"});
+                res.send({success: false, reason: "error", error: error});
             });
         }).catch(function (error) {
-            res.send({success: false, reason: "error"});
+            res.send({success: false, reason: "error", error: error});
         });
     };
 
@@ -92,10 +92,10 @@ module.exports =  function(app){
                     }
                     res.send({success: true, data: result});
                 }).catch(function (error) {
-                res.send({success: false, reason: "error"});
+                res.send({success: false, reason: "error", error: error});
             });
         }).catch(function (error) {
-            res.send({success: false, reason: "error"});
+            res.send({success: false, reason: "error", error: error});
         });
     };
 
@@ -120,11 +120,11 @@ module.exports =  function(app){
                     }
                     res.send({success: true, data: result});
                 }).catch(function (error) {
-                    res.send({success: false, reason: "error"});
+                    res.send({success: false, reason: "error", error: error});
                 });
 
         }).catch(function (error) {
-            res.send({success: false, reason: "error"});
+            res.send({success: false, reason: "error", error: error});
         });
     };
     
@@ -144,25 +144,25 @@ module.exports =  function(app){
                                 res.send({success: true});
                             })
                             .catch(function (error) {
-                                res.send({success: false, reason: "error"});
+                                res.send({success: false, reason: "error", error: error});
                             });
                         })
                         .catch(function (error) {
-                            res.send({success: false, reason: "error"});
+                            res.send({success: false, reason: "error", error: error});
                         });
                     }
                     else{
                         res.send({success: false, reason: "error"});
                     }
                 }).catch(function (error) {
-                    res.send({success: false, reason: "error"});
+                    res.send({success: false, reason: "error", error: error});
                 });
             }
             else{
                 res.send({success: false, reason: "error"});
             }
         }).catch(function (error) {
-            res.send({success: false, reason: "error"});
+            res.send({success: false, reason: "error", error: error});
         });
     };
 
