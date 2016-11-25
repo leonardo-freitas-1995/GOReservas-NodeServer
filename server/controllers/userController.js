@@ -8,7 +8,7 @@ module.exports =  function(app){
 
     var controller = {};
 
-    controller.createAccount = function (req, res, next){
+    controller.createAccount = function (req, res){
         var userData = req.body;
         userData.salt = encryption.createSalt();
         userData.password = encryption.hashPwd(userData.salt, userData.password);
@@ -22,11 +22,11 @@ module.exports =  function(app){
                 User.Insert(userData).then(function(){
                    res.send({success: true});
                 }).catch(function (error) {
-                    res.send({success: false, reason: "error"});
+                    res.send({success: false, reason: "error", error: error});
                 });
             }
         }).catch(function (error) {
-            res.send({success: false, reason: "error"});
+            res.send({success: false, reason: "error", error: error});
         });
     };
 
@@ -50,7 +50,7 @@ module.exports =  function(app){
                 res.send({success: false});
             }
         }).catch(function (error) {
-            res.send({success: false});
+            res.send({success: false, reason: "error", error: error});
         });
     };
 
@@ -67,10 +67,10 @@ module.exports =  function(app){
             delete userData.password;
         }
         Session.executeSql("UPDATE user SET name='" + userData.name + "'" + passwordQuery + " WHERE email='" + email + "'")
-            .then(function(result){
+            .then(function(){
                 res.send({success: true});
         }).catch(function(error) {
-            res.send({success: false, reason: "error"});
+            res.send({success: false, reason: "error", error: error});
         });
     };
 
