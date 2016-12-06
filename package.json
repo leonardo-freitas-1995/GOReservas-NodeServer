@@ -4,7 +4,7 @@
   "description": "Server for aplication",
   "main": "server.js",
   "scripts": {
-    "test": "",
+    "test": "protractor config/protractor.js",
     "start": "node server.js",
     "start-dev": "nodemon server.js",
     "gulp": "gulp"
@@ -34,5 +34,7 @@
     "passport-local": "^1.0.0",
     "uuid": "^2.0.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "request": "^2.79.0"
+  }
 }
