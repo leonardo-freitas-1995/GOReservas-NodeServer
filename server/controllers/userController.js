@@ -22,12 +22,10 @@ module.exports =  function(app){
                 User.Insert(userData).then(function(){
                    res.send({success: true});
                 }).catch(function (error) {
-                    console.log(error);
                     res.send({success: false, reason: "error", error: error});
                 });
             }
         }).catch(function (error) {
-            console.log(error);
             res.send({success: false, reason: "error", error: error});
         });
     };
