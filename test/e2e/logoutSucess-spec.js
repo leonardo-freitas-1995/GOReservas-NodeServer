@@ -8,7 +8,7 @@ describe('Página de Logout do Go Reservas', function(){
         request.post(settings.host + settings.testAPI.addUser);
         
         var application = new Application();
-        application.login().withCredentials('teste@teste', 'teste');
+        application.login().withCredentials(settings.testUser.email, settings.testUser.password);
     });
 
     it('Deve regressar a página inicial', function(){

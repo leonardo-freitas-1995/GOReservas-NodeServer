@@ -26,10 +26,38 @@ var testBusiness = {
     imageURL: "http://www.cc30anos.inf.ufg.br/images/me.jpg"
 };
 
+var testReserve = {
+    id: 0,
+    client: 0,
+    business: 0,
+    date: "9999-12-31 23:59:59",
+    observation: "Esta é uma reserva de teste",
+    showedUp: 0,
+    quantity: 5,
+    confirmed: 1,
+    totalValue: 0,
+    rated: 0
+};
+
+var testUserReserve = {
+    id: 0,
+    client: 0,
+    business: 0,
+    date: "9999-12-31 23:59:59",
+    observation: "Esta é uma reserva de teste",
+    showedUp: 1,
+    quantity: 5,
+    confirmed: 1,
+    totalValue: 0,
+    rated: 1,
+    rating: 4
+};
+
 module.exports =  function(app){
 
     var User = app.models.user;
     var Business = app.models.business;
+    var Reserve = app.models.reserve;
     var Session = app.db;
 
     var controller = {};
@@ -98,6 +126,40 @@ module.exports =  function(app){
 
     controller.removeTestBusiness = function (req, res) {
         Session.executeSql("DELETE FROM business WHERE id=" + testBusiness.id + "")
+            .then(function(){
+                res.send({success: true});
+            }).catch(function(error) {
+            res.send({success: false, reason: "error", error: error});
+        });
+    };
+
+    controller.createTestReserve = function (req, res){
+        var reserveData = JSON.parse(JSON.stringify(testReserve));
+
+        Session.query(Reserve).where(Reserve.id.Equal(reserveData.id)).then(function(result){
+            if (result.length){
+                Session.executeSql("DELETE FROM reserve WHERE id=" + reserveData.id + "")
+                    .then(function(){
+                        insertTestUser();
+                    });
+            }
+            else{
+                insertTestUser();
+            }
+        });
+
+        function insertTestUser(){
+            Reserve.Insert(reserveData).then(function(){
+                Session.executeSql("UPDATE reserve SET id='" + reserveData.id + "'" + " WHERE date='" + reserveData.date + "'")
+                res.send({success: true});
+            }).catch(function (error) {
+                res.send({success: false, reason: "error", error: error});
+            });
+        }
+    };
+
+    controller.removeTestReserve = function (req, res) {
+        Session.executeSql("DELETE FROM reserve WHERE id=" + reserve.id + "")
             .then(function(){
                 res.send({success: true});
             }).catch(function(error) {

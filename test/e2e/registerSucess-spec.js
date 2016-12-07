@@ -12,7 +12,7 @@ describe('Página de Cadastro no Go Reservas', function(){
     element(by.css('[ng-click="vm.register()"]')).click();
 
     var application = new Application();
-    application.login().withCredentials('teste@teste', 'teste');
+    application.login().withCredentials(settings.testUser.email, settings.testUser.password);
     
     expect(browser.getCurrentUrl())
 		.toBe(settings.host + settings.pages.dashboard);

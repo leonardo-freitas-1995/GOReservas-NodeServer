@@ -28,7 +28,12 @@ var settings = require("./protractor-settings");
             dashboardPage.goToSearch = function(){
                 element(by.css('[href="/search-business"]')).click();
                 return new SearchPage();
-            }
+            };
+
+            dashboardPage.goToBusinessPage = function(id){
+                browser.setLocation(settings.pages.business + "?id=" + id);
+                return new BusinessPage();
+            };
         };
 
         var SearchPage = function(){
@@ -37,7 +42,20 @@ var settings = require("./protractor-settings");
                 element(by.model('vm.search.term')).sendKeys(name);
                 element(by.css('[ng-click="vm.makeSearch()"]')).click();
                 browser.wait(protractor.ExpectedConditions.presenceOf($('[ng-if="vm.loaded && vm.businessArray.length"]')), 10000);
-            }
+            };
+
+            searchPage.backToDashboard = backToDashboard;
+        };
+
+        var BusinessPage = function(){
+            var businessPage = this;
+
+            businessPage.backToDashboard = backToDashboard;
+        };
+
+        function backToDashboard() {
+            browser.setLocation(settings.pages.business + "?id=" + id);
+            return new DashboardPage();
         }
     };
 
