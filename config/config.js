@@ -7,7 +7,7 @@ module.exports = {
     development: {
         rootPath: rootPath,
         db: {
-            host: "localhost",
+            host: "127.0.0.1",
             user: "goreservas",
             password: "g0r3s3rv4s",
             database: "goreservas"
@@ -17,7 +17,7 @@ module.exports = {
     production: {
         rootPath: rootPath,
         db: {
-            host: "localhost",
+            host: "127.0.0.1",
             user: "goreservas",
             password: "g0r3s3rv4s",
             database: "goreservas"
