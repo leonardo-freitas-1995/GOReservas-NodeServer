@@ -1,14 +1,14 @@
 var request = require('request');
+var settings = require("../protractor-settings");
+var Application = require('../pages.js');
 
 describe('Página de Logout do Go Reservas', function(){
 
     beforeEach(function() {
-        request.post("http://localhost:3030/api/test/createTestUser");
-        browser.get('http://localhost:3030/index');
-        element(by.css('[href="#loginModal"]')).click();
-        element(by.model('vm.account.email')).sendKeys('teste@teste');
-        element(by.model('vm.account.password')).sendKeys('teste');
-        element(by.css('[ng-click="vm.login()"]')).click();
+        request.post(settings.host + settings.testAPI.addUser);
+        
+        var application = new Application();
+        application.login().withCredentials('teste@teste', 'teste');
     });
 
     it('Deve regressar a página inicial', function(){
@@ -17,11 +17,11 @@ describe('Página de Logout do Go Reservas', function(){
         element(by.css('[ng-click="navbarVm.logout()"]')).click();
 
         expect(browser.getCurrentUrl())
-            .toBe('http://localhost:3030/index#!');
+            .toBe(settings.host + settings.pages.afterLogout);
     });
 
     afterEach(function() {
-        request.post("http://localhost:3030/api/test/cleanTestUser");
+        request.post(settings.host + settings.testAPI.removeUser);
     });
 
 });

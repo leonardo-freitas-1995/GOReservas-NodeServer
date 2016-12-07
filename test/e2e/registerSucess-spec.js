@@ -1,26 +1,24 @@
 var request = require('request');
+var settings = require("../protractor-settings");
+var Application = require('../pages.js');
 
 describe('Página de Cadastro no Go Reservas', function(){
 
   it('Deve registrar uma conta com sucesso', function(){
-    //Registro de um novo usuário:
-    browser.get('http://localhost:3030/index');
-    element(by.model('vm.newAccount.email')).sendKeys('teste@teste');
-    element(by.model('vm.newAccount.password')).sendKeys('teste');
-    element(by.model('vm.newAccount.name')).sendKeys('Teste');
+    browser.get(settings.host + settings.pages.index);
+    element(by.model('vm.newAccount.email')).sendKeys(settings.testUser.email);
+    element(by.model('vm.newAccount.password')).sendKeys(settings.testUser.password);
+    element(by.model('vm.newAccount.name')).sendKeys(settings.testUser.name);
     element(by.css('[ng-click="vm.register()"]')).click();
 
-    //Login na aplicação:
-    element(by.css('[href="#loginModal"]')).click();
-    element(by.model('vm.account.email')).sendKeys('teste@teste');
-    element(by.model('vm.account.password')).sendKeys('teste');
-    element(by.css('[ng-click="vm.login()"]')).click();
-
+    var application = new Application();
+    application.login().withCredentials('teste@teste', 'teste');
+    
     expect(browser.getCurrentUrl())
-		.toBe('http://localhost:3030/dashboard');
+		.toBe(settings.host + settings.pages.dashboard);
   });
 
   afterEach(function() {
-    request.post("http://localhost:3030/api/test/cleanTestUser");
+    request.post(settings.host + settings.testAPI.removeUser);
   });
 });
