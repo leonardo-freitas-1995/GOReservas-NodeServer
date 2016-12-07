@@ -40,7 +40,6 @@
             }
             ngAuth.authenticateUser(vm.account.email, vm.account.password).then(function(success){
                 if (success){
-                    ngNotifier.success("Logado no sistema com sucesso.");
                     angular.element("#loginModal").closeModal();
                     $location.path("/dashboard");
                 }
