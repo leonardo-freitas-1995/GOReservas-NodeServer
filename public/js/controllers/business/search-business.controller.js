@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('goreservas')
-        .controller('ngSearchBusinessCtrl', Controller);
+        .controller('SearchBusinessController', Controller);
     Controller.$inject = ['ngBusinessSvc', 'ngNotifier', 'ngIdentity'];
     function Controller(ngBusinessSvc, ngNotifier, ngIdentity) {
         var vm = this;

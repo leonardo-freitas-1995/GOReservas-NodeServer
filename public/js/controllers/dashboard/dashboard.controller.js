@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('goreservas')
-        .controller('ngDashboardCtrl', Controller);
+        .controller('DashboardController', Controller);
     Controller.$inject = ['ngBusinessSvc', 'ngReserveSvc', 'ngIdentity'];
     function Controller(ngBusinessSvc, ngReserveSvc, ngIdentity) {
         var vm = this;

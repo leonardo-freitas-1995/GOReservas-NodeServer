@@ -28,7 +28,7 @@
         // Welcome page
         .when('/index',{
             templateUrl: '/partials/main/main',
-            controller: 'ngMainCtrl',
+            controller: 'MainController',
             controllerAs: 'vm',
             resolve: {
                 auth: routeRoleCheck('notuser')
@@ -36,7 +36,7 @@
         })
         .when('/dashboard',{
             templateUrl: '/partials/dashboard/dashboard',
-            controller: 'ngDashboardCtrl',
+            controller: 'DashboardController',
             controllerAs: 'vm',
             resolve: {
                 auth: routeRoleCheck('user')
@@ -44,7 +44,7 @@
         })
         .when('/business',{
             templateUrl: '/partials/business/business',
-            controller: 'ngBusinessCtrl',
+            controller: 'BusinessController',
             controllerAs: 'vm',
             resolve: {
                 auth: routeRoleCheck('user')
@@ -52,7 +52,7 @@
         })
         .when('/search-business',{
             templateUrl: '/partials/business/search-business',
-            controller: 'ngSearchBusinessCtrl',
+            controller: 'SearchBusinessController',
             controllerAs: 'vm',
             resolve: {
                 auth: routeRoleCheck('user')
