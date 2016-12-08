@@ -4,7 +4,7 @@ extends ../includes/layout
     block main-content
         .main-content
 
-        div(ng-controller="ngNavbarCtrl as navbarVm")
+        div(ng-controller="NavbarController as navbarVm")
             #navbar.navbar-fixed.scrollspy
                 nav(ng-class="{'white': !layout.hasSidenav(), 'red lighten-1': layout.hasSidenav()}")
                     .nav-wrapper.container
@@ -66,4 +66,3 @@ extends ../includes/layout
             .footer-copyright
                 .container
                     p Copyright © GOReservas
-
