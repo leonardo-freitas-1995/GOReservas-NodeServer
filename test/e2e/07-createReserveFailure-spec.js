@@ -3,9 +3,12 @@ var settings = require("../protractor-settings");
 var Application = require('../pages.js');
 
 describe('Página de Estabelecimento do GO Reservas', function(){
-	beforeEach(function() {
-		request.post(settings.host + settings.testAPI.addUser);
-		request.post(settings.host + settings.testAPI.addBusiness);
+	beforeEach(function(done) {
+		request.post({url: settings.host + settings.testAPI.addUser}, function(){
+			request.post({url: settings.host + settings.testAPI.addBusiness}, function(){
+				done();
+			});
+		});
 	});
 
 	it('Deve realizar uma reserva', function(){
@@ -27,18 +30,17 @@ describe('Página de Estabelecimento do GO Reservas', function(){
                 expect(element(by.css('[name="reserveCard"]')).isPresent())
                     .toBe(false);
             })
-
-
-
         })
-
-
 	});
 
-	afterEach(function() {
-		request.post(settings.host + settings.testAPI.removeUser);
-		request.post(settings.host + settings.testAPI.removeBusiness);
-		request.post(settings.host + settings.testAPI.removeReserve);
+	afterEach(function(done) {
+		request.post({url: settings.host + settings.testAPI.removeUser}, function () {
+			request.post({url: settings.host + settings.testAPI.removeBusiness}, function () {
+				request.post({url: settings.host + settings.testAPI.removeReserve}, function(){
+					done();
+				});
+			});
+		});
 	});
 
 });

@@ -34,6 +34,11 @@ var settings = require("./protractor-settings");
                 browser.setLocation(settings.pages.business + "?id=" + id);
                 return new BusinessPage();
             };
+
+            dashboardPage.goToReservePage = function(id){
+                browser.setLocation(settings.pages.reserve + "?id=" + id);
+                return new ReservePage();
+            };
         };
 
         var SearchPage = function(){
@@ -51,6 +56,12 @@ var settings = require("./protractor-settings");
             var businessPage = this;
 
             businessPage.backToDashboard = backToDashboard;
+        };
+
+        var ReservePage = function(){
+            var reservePage = this;
+
+            reservePage.backToDashboard = backToDashboard;
         };
 
         function backToDashboard() {

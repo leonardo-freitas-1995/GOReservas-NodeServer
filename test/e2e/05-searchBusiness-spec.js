@@ -3,9 +3,12 @@ var settings = require("../protractor-settings");
 var Application = require('../pages.js');
 
 describe('Página de Busca do GO Reservas', function(){
-	beforeEach(function() {
-		request.post(settings.host + settings.testAPI.addUser);
-		request.post(settings.host + settings.testAPI.addBusiness);
+	beforeEach(function(done) {
+		request.post({url: settings.host + settings.testAPI.addUser}, function(){
+			request.post({url: settings.host + settings.testAPI.addBusiness}, function(){
+				done();
+			});
+		});
 	});
 
 	it('Deve procurar um estabelecimento', function(){
@@ -19,9 +22,12 @@ describe('Página de Busca do GO Reservas', function(){
 			.toBe(true);
 	});
 
-	afterEach(function() {
-		request.post(settings.host + settings.testAPI.removeUser);
-		request.post(settings.host + settings.testAPI.removeBusiness);
+	afterEach(function(done) {
+		request.post({url: settings.host + settings.testAPI.removeUser}, function(){
+			request.post({url: settings.host + settings.testAPI.removeBusiness}, function(){
+				done();
+			});
+		});
 	});
 
 });

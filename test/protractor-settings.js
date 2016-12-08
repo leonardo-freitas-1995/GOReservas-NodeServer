@@ -12,6 +12,7 @@ module.exports = {
         index: "index",
         dashboard: "dashboard",
         business: "business",
+        reserve: "reserve",
         afterLogout: "index#!"
     },
     testUser: {

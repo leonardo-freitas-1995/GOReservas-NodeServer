@@ -4,14 +4,16 @@ var Application = require('../pages.js');
 
 describe('Página de Logout do Go Reservas', function(){
 
-    beforeEach(function() {
-        request.post(settings.host + settings.testAPI.addUser);
-        
-        var application = new Application();
-        application.login().withCredentials(settings.testUser.email, settings.testUser.password);
+    beforeEach(function(done) {
+        request.post({url: settings.host + settings.testAPI.addUser}, function(){
+            done();
+        });
     });
 
     it('Deve regressar a página inicial', function(){
+        var application = new Application();
+        application.login().withCredentials(settings.testUser.email, settings.testUser.password);
+
         element(by.css('[data-activates="dropdownUser"]')).click();
         browser.wait(protractor.ExpectedConditions.visibilityOf($('[ng-click="navbarVm.logout()"]')), 5000);
         element(by.css('[ng-click="navbarVm.logout()"]')).click();
@@ -20,8 +22,10 @@ describe('Página de Logout do Go Reservas', function(){
             .toBe(settings.host + settings.pages.afterLogout);
     });
 
-    afterEach(function() {
-        request.post(settings.host + settings.testAPI.removeUser);
+    afterEach(function(done) {
+        request.post({url: settings.host + settings.testAPI.removeUser}, function(){
+            done();
+        });
     });
 
 });

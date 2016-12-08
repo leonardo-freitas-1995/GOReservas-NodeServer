@@ -2,8 +2,10 @@ var request = require('request');
 var settings = require("../protractor-settings");
 
 describe('Página de Login do Go Reservas', function(){
-    beforeEach(function() {
-        request.post(settings.host + settings.testAPI.addUser);
+    beforeEach(function(done) {
+        request.post({url: settings.host + settings.testAPI.addUser}, function(){
+			done();
+		});
     });
 
 	it('Não deve logar na página inicial', function(){
@@ -17,8 +19,10 @@ describe('Página de Login do Go Reservas', function(){
 		.toBe(settings.host + settings.pages.index);
 	});
 
-    afterEach(function() {
-        request.post(settings.host + settings.testAPI.removeUser);
+    afterEach(function(done) {
+        request.post({url: settings.host + settings.testAPI.removeUser}, function(){
+			done();
+		});
     });
 
 });

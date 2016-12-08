@@ -13,12 +13,14 @@ describe('Página de Cadastro no Go Reservas', function(){
 
     var application = new Application();
     application.login().withCredentials(settings.testUser.email, settings.testUser.password);
-    
+
     expect(browser.getCurrentUrl())
-		.toBe(settings.host + settings.pages.dashboard);
+        .toBe(settings.host + settings.pages.dashboard);
   });
 
-  afterEach(function() {
-    request.post(settings.host + settings.testAPI.removeUser);
+  afterEach(function(done) {
+    request.post({url: settings.host + settings.testAPI.removeUser}, function(){
+      done();
+    });
   });
 });

@@ -153,6 +153,7 @@ module.exports =  function(app){
                 Session.executeSql("UPDATE reserve SET id='" + reserveData.id + "'" + " WHERE date='" + reserveData.date + "'")
                 res.send({success: true});
             }).catch(function (error) {
+                console.log(error);
                 res.send({success: false, reason: "error", error: error});
             });
         }
