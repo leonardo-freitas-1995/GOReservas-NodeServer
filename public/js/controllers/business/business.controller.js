@@ -2,7 +2,7 @@
     angular
         .module('goreservas')
         .controller('BusinessController', Controller);
-    Controller.$inject = ['$timeout', '$sce', '$location', 'ngBusinessSvc', 'ngReserveSvc', 'ngNotifier', 'ngIdentity'];
+    Controller.$inject = ['$timeout', '$sce', '$location', 'businessService', 'reserveService', 'ngNotifier', 'ngIdentity'];
     function Controller($timeout, $sce, $location, ngBusinessSvc, ngReserveSvc, ngNotifier, ngIdentity) {
         var vm = this;
 

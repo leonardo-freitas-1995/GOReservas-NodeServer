@@ -1,12 +1,12 @@
 (function () {
     angular
         .module('goreservas')
-        .factory('ngReserveSvc', Service);
-    Service.$inject = ['$q', 'ngReserve'];
-    function Service($q, ngReserve) {
+        .factory('reserveService', Service);
+    Service.$inject = ['$q', 'Reserve'];
+    function Service($q, Reserve) {
         return {
             createReserve: function (reserveData) {
-                var reserve = new ngReserve(reserveData);
+                var reserve = new Reserve(reserveData);
 
                 var dfd = $q.defer();
                 reserve.$save().then(
@@ -21,7 +21,7 @@
                 return dfd.promise;
             },
             rateReserve: function (id, business, rating) {
-                var reserve = new ngReserve({rating: rating});
+                var reserve = new Reserve({rating: rating});
 
                 var dfd = $q.defer();
                 reserve.$save({id: id, business: business}).then(
@@ -36,7 +36,7 @@
                 return dfd.promise;
             },
             getReserves: function(id){
-                var reserve = new ngReserve();
+                var reserve = new Reserve();
 
                 var dfd = $q.defer();
                 reserve.$get({id: id}).then(
@@ -51,7 +51,7 @@
                 return dfd.promise;
             },
             getLastReserves: function(id){
-                var reserve = new ngReserve();
+                var reserve = new Reserve();
 
                 var dfd = $q.defer();
                 reserve.$update({id: id}).then(
@@ -66,7 +66,7 @@
                 return dfd.promise;
             },
             getOneReserve: function(client, id){
-                var reserve = new ngReserve();
+                var reserve = new Reserve();
 
                 var dfd = $q.defer();
                 reserve.$get({client: client, id: id}).then(
@@ -81,7 +81,7 @@
                 return dfd.promise;
             },
             cancelReserve: function(id, date){
-                var reserve = new ngReserve();
+                var reserve = new Reserve();
 
                 var dfd = $q.defer();
                 reserve.$delete({id: id, date: date}).then(

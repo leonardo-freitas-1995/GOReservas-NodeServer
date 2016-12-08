@@ -1,12 +1,12 @@
 (function () {
     angular
         .module('goreservas')
-        .factory('ngBusinessSvc', Service);
-    Service.$inject = ['$q', 'ngBusiness'];
-    function Service($q, ngBusiness) {
+        .factory('businessService', Service);
+    Service.$inject = ['$q', 'Business'];
+    function Service($q, Business) {
         return {
             getBusiness: function (id) {
-                var business = new ngBusiness();
+                var business = new Business();
 
                 var dfd = $q.defer();
                 business.$get({id: id}).then(
@@ -23,7 +23,7 @@
             searchBusiness: function(userId, search, filter){
                 if (search === "")
                     search = "%all%";
-                var business = new ngBusiness();
+                var business = new Business();
 
                 var dfd = $q.defer();
                 business.$get({client: userId, search: search, filter: filter}).then(
@@ -38,7 +38,7 @@
                 return dfd.promise;
             },
             getBestBusiness: function () {
-                var business = new ngBusiness();
+                var business = new Business();
 
                 var dfd = $q.defer();
                 business.$get().then(
