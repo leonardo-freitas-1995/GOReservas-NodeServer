@@ -60,7 +60,7 @@
         })
         .when('/reserve',{
             templateUrl: '/partials/reserve/reserve',
-            controller: 'ngReserveCtrl',
+            controller: 'ReserveController',
             controllerAs: 'vm',
             resolve: {
                 auth: routeRoleCheck('user')
@@ -68,7 +68,7 @@
         })
         .when('/calendar',{
             templateUrl: '/partials/reserve/calendar',
-            controller: 'ngCalendarCtrl',
+            controller: 'CalendarController',
             controllerAs: 'vm',
             resolve: {
                 auth: routeRoleCheck('user')
@@ -76,7 +76,7 @@
         })
         .when('/profile',{
             templateUrl: '/partials/profile/profile',
-            controller: 'ngProfileCtrl',
+            controller: 'ProfileController',
             controllerAs: 'vm',
             resolve: {
                 auth: routeRoleCheck('user')

@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('goreservas')
-        .controller('ngProfileCtrl', Controller);
+        .controller('ProfileController', Controller);
     Controller.$inject = ['$location', 'ngIdentity', 'ngUserSvc', 'ngNotifier'];
     function Controller($location, ngIdentity, ngUserSvc, ngNotifier) {
         var vm = this;

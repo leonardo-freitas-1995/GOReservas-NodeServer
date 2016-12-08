@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('goreservas')
-        .controller('ngCalendarCtrl', Controller);
+        .controller('CalendarController', Controller);
     Controller.$inject = ['$scope', 'ngReserveSvc', 'ngIdentity'];
     function Controller($scope, ngReserveSvc, ngIdentity) {
         var vm = this;

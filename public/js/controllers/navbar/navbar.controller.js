@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('goreservas')
-        .controller('ngNavbarCtrl', Controller);
+        .controller('NavbarController', Controller);
     Controller.$inject = ['$location', 'ngNotifier', 'ngAuth'];
     function Controller($location, ngNotifier, ngAuth) {
         var vm = this;
