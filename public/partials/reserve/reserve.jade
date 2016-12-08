@@ -52,7 +52,7 @@ div(ng-if="vm.loaded")
                     a(ng-href="{{vm.makeMapsLink(vm.reserve.business)}}", style='color:#0000FF;text-align:left', target='_blank') Ver maior
         br
         .center-align(ng-if="vm.isBeforeReserve(vm.reserve.date)")
-            a.btn.red(href="#cancelModal", modal) Cancelar Reserva
+            a.btn.red(ng-href="#cancelModal", modal) Cancelar Reserva
             br
             br
 
