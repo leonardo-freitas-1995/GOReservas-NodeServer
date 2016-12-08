@@ -28,11 +28,13 @@ div(ng-if="vm.loaded")
         br
         .row
             .col.m12.center-align
-                button.btn.green(href="#reserveModal", modal) Realizar Reserva
+                a.btn.green(ng-href="#reserveModal", modal) Realizar Reserva
 
 #reserveModal.modal
     .modal-content
         h4 Realizar Reserva
+        input.display-none(ng-model="vm.newReserve.day")
+        input.display-none(ng-model="vm.newReserve.hour")
         .row
             .input-field.col.m8.s12
                 input.datepicker(input-date, format="dd/mm/yyyy", type='text', ng-model="vm.newReserve.day", required)

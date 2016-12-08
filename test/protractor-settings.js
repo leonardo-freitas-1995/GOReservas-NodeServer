@@ -30,28 +30,20 @@ module.exports = {
         maxPerReserve: 6
     },
     testReserveNotUsed: {
-        id: 0,
         client: 0,
         business: 0,
-        date: "9999-12-31 23:59:59",
+        day: "31/12/9999",
+        hour: "23:59",
         observation: "Esta é uma reserva de teste",
-        showedUp: 0,
-        quantity: 5,
-        confirmed: 1,
-        totalValue: 0,
-        rated: 0
+        quantity: 5
     },
     testReserveUsed: {
-        id: 0,
         client: 0,
         business: 0,
-        date: "9999-12-31 23:59:59",
+        day: "31/12/9999",
+        hour: "23:59",
         observation: "Esta é uma reserva de teste",
-        showedUp: 1,
         quantity: 5,
-        confirmed: 1,
-        totalValue: 0,
-        rated: 1,
         rating: 4
     }
 };

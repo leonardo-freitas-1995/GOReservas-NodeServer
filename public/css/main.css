@@ -7,6 +7,10 @@ p {
     line-height: 2rem;
 }
 
+.display-none{
+    display: none;
+}
+
 .button-collapse {
     color: #ee6e73;
 }

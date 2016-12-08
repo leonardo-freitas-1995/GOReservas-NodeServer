@@ -16,6 +16,7 @@ module.exports =  function(app){
             return res.send({success: false, reason: "ahead of time"});
         }
 
+        console.log(reserveData);
         Session.query(Business).where(Business.id.Equal(reserveData.business)).then(function(result){
             if (result.length){
                 var businessDoc = result[0];

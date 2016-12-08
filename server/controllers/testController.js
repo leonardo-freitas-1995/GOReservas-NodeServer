@@ -30,7 +30,7 @@ var testReserve = {
     id: 0,
     client: 0,
     business: 0,
-    date: "9999-12-31 23:59:59",
+    date: "9999-12-31 23:59:00",
     observation: "Esta é uma reserva de teste",
     showedUp: 0,
     quantity: 5,
@@ -43,7 +43,7 @@ var testUserReserve = {
     id: 0,
     client: 0,
     business: 0,
-    date: "9999-12-31 23:59:59",
+    date: "9999-12-31 23:59:00",
     observation: "Esta é uma reserva de teste",
     showedUp: 1,
     quantity: 5,
@@ -138,7 +138,7 @@ module.exports =  function(app){
 
         Session.query(Reserve).where(Reserve.id.Equal(reserveData.id)).then(function(result){
             if (result.length){
-                Session.executeSql("DELETE FROM reserve WHERE id=" + reserveData.id + "")
+                Session.executeSql("DELETE FROM reserve WHERE date=" + reserveData.date + "")
                     .then(function(){
                         insertTestUser();
                     });
@@ -159,7 +159,7 @@ module.exports =  function(app){
     };
 
     controller.removeTestReserve = function (req, res) {
-        Session.executeSql("DELETE FROM reserve WHERE id=" + reserve.id + "")
+        Session.executeSql("DELETE FROM reserve WHERE date=" + testReserve.date + "")
             .then(function(){
                 res.send({success: true});
             }).catch(function(error) {

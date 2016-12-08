@@ -4,7 +4,7 @@
     h5(ng-if="!vm.lastReserves.length")
         small Você ainda não realizou nenhuma reserva. Indicamos abaixo os estabelecimentos mais bem votados do GOReservas
     .row(ng-if="vm.lastReserves.length")
-        .col.m4.business-card(ng-repeat="reserve in vm.lastReserves")
+        .col.m4.business-card(ng-repeat="reserve in vm.lastReserves", name="reserveCard")
             .card
                 .card-image
                     a(ng-href="/reserve?id={{reserve.id}}")

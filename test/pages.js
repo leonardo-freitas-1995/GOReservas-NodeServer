@@ -54,7 +54,7 @@ var settings = require("./protractor-settings");
         };
 
         function backToDashboard() {
-            browser.setLocation(settings.pages.business + "?id=" + id);
+            browser.setLocation(settings.pages.dashboard);
             return new DashboardPage();
         }
     };
