@@ -3,7 +3,7 @@
         .module('goreservas')
         .controller('ReserveController', Controller);
     Controller.$inject = ['$sce', '$location', 'reserveService', 'ngIdentity', 'ngNotifier'];
-    function Controller($sce, $location, ngReserveSvc, ngIdentity, ngNotifier) {
+    function Controller($sce, $location, reserveService, ngIdentity, ngNotifier) {
         var vm = this;
 
         vm.reserve = null;
@@ -21,7 +21,7 @@
         };
 
         vm.cancelReserve = function(){
-            ngReserveSvc.cancelReserve(vm.reserve.id, new Date(vm.reserve.date).getTime()).then(function(response){
+            reserveService.cancelReserve(vm.reserve.id, new Date(vm.reserve.date).getTime()).then(function(response){
                     if (response.success){
                         ngNotifier.success("Reserva cancelada com sucesso");
                         angular.element("#cancelModal").closeModal();
@@ -40,7 +40,7 @@
         };
 
         vm.rateReserve = function(){
-            ngReserveSvc.rateReserve(vm.reserve.id, vm.reserve.business.id, vm.rating).then(function(response){
+            reserveService.rateReserve(vm.reserve.id, vm.reserve.business.id, vm.rating).then(function(response){
                     if (response.success){
                         ngNotifier.success("Reserva avaliada com sucesso");
                         vm.reserve.rated = true;
@@ -57,7 +57,7 @@
         (function(){
             var id = $location.search().id;
             if (id){
-                ngReserveSvc.getOneReserve(ngIdentity.currentUser.id, id).then(function(response){
+                reserveService.getOneReserve(ngIdentity.currentUser.id, id).then(function(response){
                         vm.reserve = response.data;
                         if (vm.reserve.rated)
                             vm.rating = vm.reserve.rating;

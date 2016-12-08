@@ -3,7 +3,7 @@
         .module('goreservas')
         .controller('BusinessController', Controller);
     Controller.$inject = ['$timeout', '$sce', '$location', 'businessService', 'reserveService', 'ngNotifier', 'ngIdentity'];
-    function Controller($timeout, $sce, $location, ngBusinessSvc, ngReserveSvc, ngNotifier, ngIdentity) {
+    function Controller($timeout, $sce, $location, businessService, reserveService, ngNotifier, ngIdentity) {
         var vm = this;
 
         vm.business = null;
@@ -41,7 +41,7 @@
             vm.newReserve.totalValue = vm.getTotalReserve();
             vm.newReserve.business = parseInt($location.search().id);
             vm.newReserve.client = ngIdentity.currentUser.id;
-            ngReserveSvc.createReserve(vm.newReserve).then(function(response){
+            reserveService.createReserve(vm.newReserve).then(function(response){
                 if (response.success){
                     if (response.confirmed){
                         ngNotifier.success("Sua reserva foi criada e confirmada com sucesso.");
@@ -71,7 +71,7 @@
         (function(){
             var id = $location.search().id;
             if (id){
-                ngBusinessSvc.getBusiness(id).then(function(response){
+                businessService.getBusiness(id).then(function(response){
                         vm.business = response.data;
                         vm.loaded = true;
                     },
