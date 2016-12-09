@@ -1,7 +1,7 @@
 (function() {
     angular
         .module('goreservas')
-        .factory('auth', Service);
+        .factory('authService', Service);
     Service.$inject = ['$http', '$q', 'identity',  'User'];
     function Service($http, $q, identity, User) {
         return {

@@ -5,12 +5,12 @@
 
     // Routes authentications
     function routeRoleCheck(role){
-        AuthService.$inject = ['auth'];
-        function AuthService(auth){
+        AuthService.$inject = ['authService'];
+        function AuthService(authService){
             var authType = {
-                owner: auth.authorizeCurrentUserForRoute('owner'),
-                user: auth.authorizeAuthenticatedUserForRoute(),
-                notuser: auth.authorizeNotAuthenticatedUserForRoute()
+                owner: authService.authorizeCurrentUserForRoute('owner'),
+                user: authService.authorizeAuthenticatedUserForRoute(),
+                notuser: authService.authorizeNotAuthenticatedUserForRoute()
             };
             if (!authType[role])
                 return false;

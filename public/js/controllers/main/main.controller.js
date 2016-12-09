@@ -2,12 +2,14 @@
     angular
         .module('goreservas')
         .controller('MainController', Controller);
-    Controller.$inject = ['$location', 'notifier', 'auth', 'userService'];
-    function Controller($location, notifier, auth, userService) {
+    Controller.$inject = ['$location', 'notifier', 'authService', 'userService'];
+    function Controller($location, notifier, authService, userService) {
         var vm = this;
 
         vm.newAccount = {};
         vm.account = {};
+
+        console.log(authService);
 
         vm.register = function(){
             if (!vm.newAccount.name || !vm.newAccount.email || !vm.newAccount.password){
@@ -38,7 +40,7 @@
                 notifier.error("Informe todos os campos para efetuar login");
                 return false;
             }
-            auth.authenticateUser(vm.account.email, vm.account.password).then(function(success){
+            authService.authenticateUser(vm.account.email, vm.account.password).then(function(success){
                 if (success){
                     angular.element("#loginModal").closeModal();
                     $location.path("/dashboard");
