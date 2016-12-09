@@ -9,44 +9,42 @@ script(type="text/javascript", src="/vendor/angular-materialize/src/angular-mate
 // * Lib
 script(type="text/javascript", src="/js/lib/init.js")
 
-// * Main App
-// *** Main Config
-script(type="text/javascript", src="/js/app.js")
+// * Angular App
+// *** Main app
+script(type="text/javascript", src="/js/app/app.module.js")
 // *** Routes Config
-script(type="text/javascript", src="/js/routes.js")
+script(type="text/javascript", src="/js/app/app.routes.js")
 
-// * Controllers
 // *** Main
-script(type="text/javascript", src="/js/controllers/main/main.controller.js")
-// *** Dashboard
-script(type="text/javascript", src="/js/controllers/dashboard/dashboard.controller.js")
+script(type="text/javascript", src="/js/app/main/main.controller.js")
+script(type="text/javascript", src="/js/app/main/dashboard.controller.js")
+
 // *** Navbar
-script(type="text/javascript", src="/js/controllers/navbar/navbar.controller.js")
-// *** Business
-script(type="text/javascript", src="/js/controllers/business/business.controller.js")
-script(type="text/javascript", src="/js/controllers/business/search-business.controller.js")
-// *** Reserve
-script(type="text/javascript", src="/js/controllers/reserve/reserve.controller.js")
-script(type="text/javascript", src="/js/controllers/reserve/calendar.controller.js")
-// *** Profile
-script(type="text/javascript", src="/js/controllers/profile/profile.controller.js")
+script(type="text/javascript", src="/js/app/navbar/navbar.controller.js")
 
-// * Services
+// *** Business
+script(type="text/javascript", src="/js/app/business/business.controller.js")
+script(type="text/javascript", src="/js/app/business/search-business.controller.js")
+script(type="text/javascript", src="/js/app/business/business.resource.js")
+script(type="text/javascript", src="/js/app/business/business.service.js")
+
+// *** Reserve
+script(type="text/javascript", src="/js/app/reserve/reserve.controller.js")
+script(type="text/javascript", src="/js/app/reserve/calendar.controller.js")
+script(type="text/javascript", src="/js/app/reserve/reserve.resource.js")
+script(type="text/javascript", src="/js/app/reserve/reserve.service.js")
+
+// *** User
+script(type="text/javascript", src="/js/app/user/profile.controller.js")
+script(type="text/javascript", src="/js/app/user/user.resource.js")
+script(type="text/javascript", src="/js/app/user/user.service.js")
+
 // *** Auth
-script(type="text/javascript", src="/js/services/auth/user.resource.js")
-script(type="text/javascript", src="/js/services/auth/user.service.js")
-script(type="text/javascript", src="/js/services/auth/identity.service.js")
-script(type="text/javascript", src="/js/services/auth/auth.service.js")
-// *** Tools
-script(type="text/javascript", src="/js/services/tools/notifier.service.js")
-script(type="text/javascript", src="/js/services/tools/layout.service.js")
-// *** Business
-script(type="text/javascript", src="/js/services/business/business.resource.js")
-script(type="text/javascript", src="/js/services/business/business.service.js")
-// *** Reserve
-script(type="text/javascript", src="/js/services/reserve/reserve.resource.js")
-script(type="text/javascript", src="/js/services/reserve/reserve.service.js")
+script(type="text/javascript", src="/js/app/auth/identity.service.js")
+script(type="text/javascript", src="/js/app/auth/auth.service.js")
 
-// * Directives
-script(type="text/javascript", src="/js/directives/scrolling-link.directive.js")
-script(type="text/javascript", src="/js/directives/rating-star.directive.js")
+// *** Tools
+script(type="text/javascript", src="/js/app/tools/notifier.service.js")
+script(type="text/javascript", src="/js/app/tools/layout.service.js")
+script(type="text/javascript", src="/js/app/tools/scrolling-link.directive.js")
+script(type="text/javascript", src="/js/app/tools/rating-star.directive.js")
