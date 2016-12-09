@@ -105,15 +105,15 @@ module.exports =  function(app){
             if (result.length){
                 Session.executeSql("DELETE FROM business WHERE id=" + businessData.id + "")
                     .then(function(){
-                        insertTestUser();
+                        insertTestBusiness();
                     });
             }
             else{
-                insertTestUser();
+                insertTestBusiness();
             }
         });
 
-        function insertTestUser(){
+        function insertTestBusiness(){
             Business.Insert(businessData).then(function(){
                 Session.executeSql("UPDATE business SET id='" + businessData.id + "'" + " WHERE name='" + businessData.name + "'")
                 res.send({success: true});
@@ -133,34 +133,14 @@ module.exports =  function(app){
     };
 
     controller.createTestReserve = function (req, res){
-        var reserveData = JSON.parse(JSON.stringify(testReserve));
-
-        Session.query(Reserve).where(Reserve.id.Equal(reserveData.id)).then(function(result){
-            if (result.length){
-                Session.executeSql("DELETE FROM reserve WHERE date=" + reserveData.date + "")
-                    .then(function(){
-                        insertTestUser();
-                    });
-            }
-            else{
-                insertTestUser();
-            }
-        });
-
-        function insertTestUser(){
-            Reserve.Insert(reserveData).then(function(){
-                Session.executeSql("UPDATE reserve SET id='" + reserveData.id + "'" + " WHERE date='" + reserveData.date + "'")
-                res.send({success: true});
-            }).catch(function (error) {
-                console.log(error);
-                res.send({success: false, reason: "error", error: error});
-            });
-        }
+        createReserve(JSON.parse(JSON.stringify(testReserve)), res);
     };
 
     controller.createUsedTestReserve = function (req, res){
-        var reserveData = JSON.parse(JSON.stringify(usedTestReserve));
+        createReserve(JSON.parse(JSON.stringify(usedTestReserve)), res);
+    };
 
+    function createReserve(reserveData, res){
         Session.query(Reserve).where(Reserve.id.Equal(reserveData.id)).then(function(result){
             if (result.length){
                 Session.executeSql("DELETE FROM reserve WHERE date=" + reserveData.date + "")
@@ -178,11 +158,10 @@ module.exports =  function(app){
                 Session.executeSql("UPDATE reserve SET id='" + reserveData.id + "'" + " WHERE date='" + reserveData.date + "'")
                 res.send({success: true});
             }).catch(function (error) {
-                console.log(error);
                 res.send({success: false, reason: "error", error: error});
             });
         }
-    };
+    }
 
     controller.removeTestReserve = function (req, res) {
         Session.executeSql("DELETE FROM reserve WHERE date=" + testReserve.date + "")
