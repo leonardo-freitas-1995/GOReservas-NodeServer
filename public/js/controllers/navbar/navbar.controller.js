@@ -2,7 +2,7 @@
     angular
         .module('goreservas')
         .controller('NavbarController', Controller);
-    Controller.$inject = ['$location', 'ngNotifier', 'ngAuth'];
+    Controller.$inject = ['$location', 'notifierService', 'authService'];
     function Controller($location, ngNotifier, ngAuth) {
         var vm = this;
 

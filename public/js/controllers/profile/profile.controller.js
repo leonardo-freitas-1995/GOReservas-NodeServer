@@ -2,7 +2,7 @@
     angular
         .module('goreservas')
         .controller('ProfileController', Controller);
-    Controller.$inject = ['$location', 'ngIdentity', 'ngUserSvc', 'ngNotifier'];
+    Controller.$inject = ['$location', 'identityService', 'userService', 'notifierService'];
     function Controller($location, ngIdentity, ngUserSvc, ngNotifier) {
         var vm = this;
 
@@ -10,7 +10,7 @@
             name: ngIdentity.currentUser.name,
             password: "",
             repeatPassword: ""
-        }
+        };
 
         vm.updateUser = function(){
             if (vm.account.password !== "" && vm.account.password !== vm.account.repeatPassword){

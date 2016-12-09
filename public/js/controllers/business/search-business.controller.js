@@ -2,7 +2,7 @@
     angular
         .module('goreservas')
         .controller('SearchBusinessController', Controller);
-    Controller.$inject = ['businessService', 'ngNotifier', 'ngIdentity'];
+    Controller.$inject = ['businessService', 'notifierService', 'identityService'];
     function Controller(businessService, ngNotifier, ngIdentity) {
         var vm = this;
 

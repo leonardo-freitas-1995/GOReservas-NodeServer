@@ -2,7 +2,7 @@
     angular
         .module('goreservas')
         .controller('MainController', Controller);
-    Controller.$inject = ['$location', 'ngNotifier', 'ngAuth', 'ngUserSvc'];
+    Controller.$inject = ['$location', 'notifierService', 'authService', 'userService'];
     function Controller($location, ngNotifier, ngAuth, ngUserSvc) {
         var vm = this;
 
