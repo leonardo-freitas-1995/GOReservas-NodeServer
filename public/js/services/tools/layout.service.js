@@ -1,8 +1,8 @@
 (function() {
     angular
         .module('goreservas')
-        .factory('ngLayout', Service);
-    Service.$inject = ['$location', 'ngIdentity'];
+        .factory('layout', Service);
+    Service.$inject = ['$location', 'identityService'];
     function Service($location, ngIdentity) {
         return {
             isAuthenticated: function() {
