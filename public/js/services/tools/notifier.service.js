@@ -1,7 +1,7 @@
 (function() {
     angular
         .module('goreservas')
-        .factory('notifierService', Service);
+        .factory('notifier', Service);
     function Service() {
         return {
             success: function(message, time){

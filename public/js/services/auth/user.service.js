@@ -2,7 +2,7 @@
     angular
         .module('goreservas')
         .factory('userService', Service);
-    Service.$inject = ['$q', 'userService'];
+    Service.$inject = ['$q', 'User'];
     function Service($q, User) {
         return {
             createUser: function (userData) {

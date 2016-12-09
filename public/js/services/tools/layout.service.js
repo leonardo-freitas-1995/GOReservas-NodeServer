@@ -2,20 +2,20 @@
     angular
         .module('goreservas')
         .factory('layout', Service);
-    Service.$inject = ['$location', 'identityService'];
-    function Service($location, ngIdentity) {
+    Service.$inject = ['$location', 'identity'];
+    function Service($location, identity) {
         return {
             isAuthenticated: function() {
-                return ngIdentity.isAuthenticated();
+                return identity.isAuthenticated();
             },
             getCurrentUser: function(){
-                return ngIdentity.currentUser;
+                return identity.currentUser;
             },
             getUserFirstName: function(){
-                if (!ngIdentity.isAuthenticated())
+                if (!identity.isAuthenticated())
                     return "";
 
-                var name = ngIdentity.currentUser.name;
+                var name = identity.currentUser.name;
                 if (name.indexOf(" ") === -1)
                     return name;
                 return name.substring(0, name.indexOf(" "));

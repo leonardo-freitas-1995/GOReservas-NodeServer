@@ -26,9 +26,9 @@
         });
     }
 
-    AppRun.$inject = ['$rootScope', '$location', 'ngLayout'];
-    function AppRun($rootScope, $location, ngLayout) {
-        $rootScope.layout = ngLayout;
+    AppRun.$inject = ['$rootScope', '$location', 'layout'];
+    function AppRun($rootScope, $location, layout) {
+        $rootScope.layout = layout;
 
         $rootScope.$on('$routeChangeError', function (evt, current, previous, rejection) {
             if (rejection === 'not authorized') {
