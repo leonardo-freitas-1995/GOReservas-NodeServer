@@ -6,6 +6,7 @@ module.exports = {
         addBusiness: "api/test/createTestBusiness",
         removeBusiness: "api/test/cleanTestBusiness",
         addReserve: "api/test/createTestReserve",
+        addUsedReserve: "api/test/createUsedTestReserve",
         removeReserve: "api/test/cleanTestReserve"
     },
     pages: {
@@ -37,7 +38,6 @@ module.exports = {
         day: "31/12/9999",
         hour: "23:59",
         observation: "Esta é uma reserva de teste",
-        quantity: 5,
-        rating: 4
+        quantity: 5
     }
 };

@@ -11,7 +11,7 @@ describe('Página de Estabelecimento do GO Reservas', function(){
 		});
 	});
 
-	it('Deve realizar uma reserva', function(){
+	it('Não deve realizar uma reserva', function(){
 		var application = new Application();
 		var businessPage = application.login().withCredentials(settings.testUser.email, settings.testUser.password)
 			.goToBusinessPage(settings.testBusiness.id);

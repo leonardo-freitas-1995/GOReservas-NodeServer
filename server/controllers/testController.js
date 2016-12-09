@@ -39,7 +39,7 @@ var testReserve = {
     rated: 0
 };
 
-var testUserReserve = {
+var usedTestReserve = {
     id: 0,
     client: 0,
     business: 0,
@@ -49,8 +49,7 @@ var testUserReserve = {
     quantity: 5,
     confirmed: 1,
     totalValue: 0,
-    rated: 1,
-    rating: 4
+    rated: 0
 };
 
 module.exports =  function(app){
@@ -135,6 +134,32 @@ module.exports =  function(app){
 
     controller.createTestReserve = function (req, res){
         var reserveData = JSON.parse(JSON.stringify(testReserve));
+
+        Session.query(Reserve).where(Reserve.id.Equal(reserveData.id)).then(function(result){
+            if (result.length){
+                Session.executeSql("DELETE FROM reserve WHERE date=" + reserveData.date + "")
+                    .then(function(){
+                        insertTestUser();
+                    });
+            }
+            else{
+                insertTestUser();
+            }
+        });
+
+        function insertTestUser(){
+            Reserve.Insert(reserveData).then(function(){
+                Session.executeSql("UPDATE reserve SET id='" + reserveData.id + "'" + " WHERE date='" + reserveData.date + "'")
+                res.send({success: true});
+            }).catch(function (error) {
+                console.log(error);
+                res.send({success: false, reason: "error", error: error});
+            });
+        }
+    };
+
+    controller.createUsedTestReserve = function (req, res){
+        var reserveData = JSON.parse(JSON.stringify(usedTestReserve));
 
         Session.query(Reserve).where(Reserve.id.Equal(reserveData.id)).then(function(result){
             if (result.length){

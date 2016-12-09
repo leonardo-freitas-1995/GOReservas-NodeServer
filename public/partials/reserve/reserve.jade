@@ -30,11 +30,11 @@ div(ng-if="vm.loaded")
                         span(ng-if="vm.reserve.showedUp") Reserva utilizada
             .col.m4.center-align(ng-if="vm.reserve.showedUp")
                 div(ng-if="!vm.reserve.rated")
-                    span.pointer(ng-click="vm.rating = 1", rating-star="{model: vm.rating, rating: 1}")
-                    span.pointer(ng-click="vm.rating = 2", rating-star="{model: vm.rating, rating: 2}")
-                    span.pointer(ng-click="vm.rating = 3", rating-star="{model: vm.rating, rating: 3}")
-                    span.pointer(ng-click="vm.rating = 4", rating-star="{model: vm.rating, rating: 4}")
-                    span.pointer(ng-click="vm.rating = 5", rating-star="{model: vm.rating, rating: 5}")
+                    span#rate-1-star.pointer(ng-click="vm.rating = 1", rating-star="{model: vm.rating, rating: 1}")
+                    span#rate-2-star.pointer(ng-click="vm.rating = 2", rating-star="{model: vm.rating, rating: 2}")
+                    span#rate-3-star.pointer(ng-click="vm.rating = 3", rating-star="{model: vm.rating, rating: 3}")
+                    span#rate-4-star.pointer(ng-click="vm.rating = 4", rating-star="{model: vm.rating, rating: 4}")
+                    span#rate-5-star.pointer(ng-click="vm.rating = 5", rating-star="{model: vm.rating, rating: 5}")
                     br
                     button.btn-flat(ng-click="vm.rateReserve()") Avaliar
 

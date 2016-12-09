@@ -19,8 +19,8 @@ describe('Página de Cadastro no Go Reservas', function(){
   });
 
   afterEach(function(done) {
-    request.post({url: settings.host + settings.testAPI.removeUser}, function(){
-      done();
-    });
+      request.post({url: settings.host + settings.testAPI.removeUser}, function(){
+          done();
+      });
   });
 });
