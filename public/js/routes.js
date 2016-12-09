@@ -83,7 +83,9 @@
     function RouteConfig($routeProvider){
 
         for (var route in routes){
-            $routeProvider.when(route, routes[route]);
+            if (routes.hasOwnProperty(route)){
+                $routeProvider.when(route, routes[route]);
+            }
         }
 
         $routeProvider.otherwise({redirectTo: '/index'});

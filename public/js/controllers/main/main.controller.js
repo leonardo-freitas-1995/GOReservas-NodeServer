@@ -9,8 +9,6 @@
         vm.newAccount = {};
         vm.account = {};
 
-        console.log(authService);
-
         vm.register = function(){
             if (!vm.newAccount.name || !vm.newAccount.email || !vm.newAccount.password){
                 notifier.error("Preencha todos os campos corretamente.");
