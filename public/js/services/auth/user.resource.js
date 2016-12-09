@@ -1,15 +1,13 @@
 (function() {
     angular
         .module('goreservas')
-        .factory('userService', Service);
+        .factory('User', Service);
     Service.$inject = ['$resource'];
     function Service($resource) {
-        var UserResource = $resource(
+        return $resource(
             '/api/users/:email',
             {},
             {update: {method: 'PUT', isArray: false}}
         );
-
-        return UserResource;
     }
 })();

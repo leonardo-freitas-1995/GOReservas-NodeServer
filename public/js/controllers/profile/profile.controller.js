@@ -2,34 +2,34 @@
     angular
         .module('goreservas')
         .controller('ProfileController', Controller);
-    Controller.$inject = ['$location', 'identityService', 'userService', 'notifierService'];
-    function Controller($location, ngIdentity, ngUserSvc, ngNotifier) {
+    Controller.$inject = ['$location', 'identity', 'userService', 'notifier'];
+    function Controller($location, identity, userService, notifier) {
         var vm = this;
 
         vm.account = {
-            name: ngIdentity.currentUser.name,
+            name: identity.currentUser.name,
             password: "",
             repeatPassword: ""
         };
 
         vm.updateUser = function(){
             if (vm.account.password !== "" && vm.account.password !== vm.account.repeatPassword){
-                ngNotifier.error("Repita a senha exatamente igual a primeira.");
+                notifier.error("Repita a senha exatamente igual a primeira.");
                 return false;
             }
             var newName = vm.account.name;
-            ngUserSvc.updateUser(ngIdentity.currentUser.email, vm.account).then(function(response){
+            userService.updateUser(identity.currentUser.email, vm.account).then(function(response){
                 if (response.success){
-                    ngNotifier.success("Dados atualizados com sucessos!");
-                    ngIdentity.currentUser.name = newName;
+                    notifier.success("Dados atualizados com sucessos!");
+                    identity.currentUser.name = newName;
                     $location.path("/dashboard");
                 }
                 else{
-                    ngNotifier.error("Ocorreu um erro. Atualize a página e tente novamente");
+                    notifier.error("Ocorreu um erro. Atualize a página e tente novamente");
                 }
             },
             function(){
-                ngNotifier.error("Ocorreu um erro. Atualize a página e tente novamente");
+                notifier.error("Ocorreu um erro. Atualize a página e tente novamente");
             });
         }
     }

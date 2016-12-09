@@ -2,13 +2,13 @@
     angular
         .module('goreservas')
         .controller('NavbarController', Controller);
-    Controller.$inject = ['$location', 'notifierService', 'authService'];
-    function Controller($location, ngNotifier, ngAuth) {
+    Controller.$inject = ['$location', 'notifier', 'auth'];
+    function Controller($location, notifier, auth) {
         var vm = this;
 
         vm.logout = function(){
-            ngAuth.logoutUser().then(function(){
-                ngNotifier.success("Sessão encerrada com sucesso.");
+            auth.logoutUser().then(function(){
+                notifier.success("Sessão encerrada com sucesso.");
                 $location.path("/index");
             });
         };

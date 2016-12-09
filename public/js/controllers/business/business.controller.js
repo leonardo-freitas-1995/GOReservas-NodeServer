@@ -2,8 +2,8 @@
     angular
         .module('goreservas')
         .controller('BusinessController', Controller);
-    Controller.$inject = ['$timeout', '$sce', '$location', 'businessService', 'reserveService', 'notifierService', 'identityService'];
-    function Controller($timeout, $sce, $location, businessService, reserveService, ngNotifier, ngIdentity) {
+    Controller.$inject = ['$timeout', '$sce', '$location', 'businessService', 'reserveService', 'notifier', 'identity'];
+    function Controller($timeout, $sce, $location, businessService, reserveService, notifier, identity) {
         var vm = this;
 
         vm.business = null;
@@ -34,33 +34,33 @@
 
         vm.createReserve = function(){
             if (!vm.newReserve.day || !vm.newReserve.hour || !vm.newReserve.quantity){
-                ngNotifier.error("Preencha os campos corretamente");
+                notifier.error("Preencha os campos corretamente");
                 return false;
             }
             vm.newReserve.date = vm.newReserve.day.split("/").reverse().join("-") + " " + vm.newReserve.hour + ":00";
             vm.newReserve.totalValue = vm.getTotalReserve();
             vm.newReserve.business = parseInt($location.search().id);
-            vm.newReserve.client = ngIdentity.currentUser.id;
+            vm.newReserve.client = identity.currentUser.id;
             reserveService.createReserve(vm.newReserve).then(function(response){
                 if (response.success){
                     if (response.confirmed){
-                        ngNotifier.success("Sua reserva foi criada e confirmada com sucesso.");
+                        notifier.success("Sua reserva foi criada e confirmada com sucesso.");
                         angular.element("#reserveModal").closeModal();
                     }
                     else{
-                        ngNotifier.success("Sua reserva foi criada, e está pendente sujeita a confirmação.");
+                        notifier.success("Sua reserva foi criada, e está pendente sujeita a confirmação.");
                         angular.element("#reserveModal").closeModal();
                     }
                 }
                 else if (response.reason === "ahead of time"){
-                    ngNotifier.error("É preciso fazer reservas com uma hora de antedecências.");
+                    notifier.error("É preciso fazer reservas com uma hora de antedecências.");
                 }
                 else{
-                    ngNotifier.error("Não foi possível completar o pedido.");
+                    notifier.error("Não foi possível completar o pedido.");
                 }
             },
             function(){
-                ngNotifier.error("Não foi possível completar o pedido.");
+                notifier.error("Não foi possível completar o pedido.");
             });
         };
 

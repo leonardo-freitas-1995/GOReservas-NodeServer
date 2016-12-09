@@ -2,8 +2,8 @@
     angular
         .module('goreservas')
         .controller('CalendarController', Controller);
-    Controller.$inject = ['$scope', 'reserveService', 'identityService'];
-    function Controller($scope, reserveService, ngIdentity) {
+    Controller.$inject = ['$scope', 'reserveService', 'identity'];
+    function Controller($scope, reserveService, identity) {
         var vm = this;
 
         var today = new Date();
@@ -127,7 +127,7 @@
         }, true);
 
         (function(){
-            reserveService.getReserves(ngIdentity.currentUser.id).then(function(response){
+            reserveService.getReserves(identity.currentUser.id).then(function(response){
                vm.reserves = response.data;
             });
         })()

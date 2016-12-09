@@ -2,8 +2,8 @@
     angular
         .module('goreservas')
         .controller('ReserveController', Controller);
-    Controller.$inject = ['$sce', '$location', 'reserveService', 'identityService', 'notifierService'];
-    function Controller($sce, $location, reserveService, ngIdentity, ngNotifier) {
+    Controller.$inject = ['$sce', '$location', 'reserveService', 'identity', 'notifier'];
+    function Controller($sce, $location, reserveService, identity, notifier) {
         var vm = this;
 
         vm.reserve = null;
@@ -23,41 +23,41 @@
         vm.cancelReserve = function(){
             reserveService.cancelReserve(vm.reserve.id, new Date(vm.reserve.date).getTime()).then(function(response){
                     if (response.success){
-                        ngNotifier.success("Reserva cancelada com sucesso");
+                        notifier.success("Reserva cancelada com sucesso");
                         angular.element("#cancelModal").closeModal();
                         $location.path("/dashboard").search({});
                     }
                     else if (response.reason === "ahead of time"){
-                        ngNotifier.error("Não é possível cancelar uma reserva que já passou de sua data.");
+                        notifier.error("Não é possível cancelar uma reserva que já passou de sua data.");
                     }
                     else{
-                        ngNotifier.error("Não foi possível completar esta ação.");
+                        notifier.error("Não foi possível completar esta ação.");
                     }
                 },
                 function(){
-                    ngNotifier.error("Não foi possível completar esta ação");
+                    notifier.error("Não foi possível completar esta ação");
                 });
         };
 
         vm.rateReserve = function(){
             reserveService.rateReserve(vm.reserve.id, vm.reserve.business.id, vm.rating).then(function(response){
                     if (response.success){
-                        ngNotifier.success("Reserva avaliada com sucesso");
+                        notifier.success("Reserva avaliada com sucesso");
                         vm.reserve.rated = true;
                     }
                     else{
-                        ngNotifier.error("Não foi possível completar esta ação.");
+                        notifier.error("Não foi possível completar esta ação.");
                     }
                 },
                 function(){
-                    ngNotifier.error("Não foi possível completar esta ação");
+                    notifier.error("Não foi possível completar esta ação");
                 });
         };
 
         (function(){
             var id = $location.search().id;
             if (id){
-                reserveService.getOneReserve(ngIdentity.currentUser.id, id).then(function(response){
+                reserveService.getOneReserve(identity.currentUser.id, id).then(function(response){
                         vm.reserve = response.data;
                         if (vm.reserve.rated)
                             vm.rating = vm.reserve.rating;

@@ -3,10 +3,10 @@
         .module('goreservas')
         .factory('userService', Service);
     Service.$inject = ['$q', 'userService'];
-    function Service($q, ngUser) {
+    function Service($q, User) {
         return {
             createUser: function (userData) {
-                var user = new ngUser(userData);
+                var user = new User(userData);
 
                 var dfd = $q.defer();
                 user.$save().then(
@@ -21,7 +21,7 @@
                 return dfd.promise;
             },
             updateUser: function (email, userData) {
-                var user = new ngUser(userData);
+                var user = new User(userData);
 
                 var dfd = $q.defer();
                 user.$save({email: email}).then(
@@ -34,7 +34,7 @@
                 );
 
                 return dfd.promise;
-            },
+            }
         }
     }
 })();

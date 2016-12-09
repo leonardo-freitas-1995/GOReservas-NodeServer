@@ -2,8 +2,8 @@
     angular
         .module('goreservas')
         .controller('SearchBusinessController', Controller);
-    Controller.$inject = ['businessService', 'notifierService', 'identityService'];
-    function Controller(businessService, ngNotifier, ngIdentity) {
+    Controller.$inject = ['businessService', 'notifier', 'identity'];
+    function Controller(businessService, notifier, identity) {
         var vm = this;
 
         vm.search = {
@@ -17,12 +17,12 @@
 
         vm.makeSearch = function(){
             if (!vm.search.filter.filter(function(val){return val != null;}).length){
-                ngNotifier.error("É preciso selecionar pelo menos um dos filtros para efetuar a busca.");
+                notifier.error("É preciso selecionar pelo menos um dos filtros para efetuar a busca.");
                 return false;
             }
             vm.lastSearch = vm.search.term;
             vm.loaded = false;
-            businessService.searchBusiness(ngIdentity.currentUser.id, vm.search.term,
+            businessService.searchBusiness(identity.currentUser.id, vm.search.term,
                 vm.search.filter)
                 .then(function(response){
                     vm.businessArray = response.data
