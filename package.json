@@ -35,6 +35,15 @@
     "uuid": "^2.0.2"
   },
   "devDependencies": {
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "gulp": "^3.9.1",
+    "gulp-change": "^1.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-concat": "^2.6.0",
+    "gulp-html-replace": "^1.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "run-sequence": "^1.2.2"
   }
 }
