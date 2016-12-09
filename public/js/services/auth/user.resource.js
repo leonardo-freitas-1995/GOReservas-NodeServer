@@ -1,7 +1,7 @@
 (function() {
     angular
         .module('goreservas')
-        .factory('ngUser', Service);
+        .factory('userService', Service);
     Service.$inject = ['$resource'];
     function Service($resource) {
         var UserResource = $resource(

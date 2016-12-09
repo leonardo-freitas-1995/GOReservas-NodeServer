@@ -1,8 +1,8 @@
 (function () {
     angular
         .module('goreservas')
-        .factory('ngUserSvc', Service);
-    Service.$inject = ['$q', 'ngUser'];
+        .factory('userService', Service);
+    Service.$inject = ['$q', 'userService'];
     function Service($q, ngUser) {
         return {
             createUser: function (userData) {

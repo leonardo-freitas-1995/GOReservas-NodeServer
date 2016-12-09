@@ -1,8 +1,8 @@
 (function() {
     angular
         .module('goreservas')
-        .factory('ngIdentity', Service);
-    Service.$inject = ['$window', 'ngUser'];
+        .factory('identityService', Service);
+    Service.$inject = ['$window', 'User'];
     function Service($window, ngUser) {
         var currentUser;
         if (!!$window.bootstrappedUserObject) {

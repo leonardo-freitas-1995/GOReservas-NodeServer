@@ -1,8 +1,8 @@
 (function() {
     angular
         .module('goreservas')
-        .factory('ngAuth', Service);
-    Service.$inject = ['$http', '$q', 'ngIdentity',  'ngUser'];
+        .factory('authService', Service);
+    Service.$inject = ['$http', '$q', 'identityService',  'userService'];
     function Service($http, $q, ngIdentity, ngUser) {
         return {
             authenticateUser: function (username, password) {
